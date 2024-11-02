@@ -1,10 +1,13 @@
+import { useTranslation } from "react-i18next";
 import { HotKey } from "./hotkey";
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="mb-5 flex w-screen flex-row items-end justify-between px-20">
       <p className="text-focusly-normal">
-        Focusly — by{" "}
+        Focusly — {t("by")}{" "}
         <a
           href="https://github.com/iamdevmarcos"
           target="_blank"
@@ -17,9 +20,12 @@ export const Footer = () => {
       </p>
 
       <div className="flex flex-col gap-2.5">
-        <HotKey keys={["R"]} description="-> Reset Time" />
-        <HotKey keys={["Backspace"]} description="-> Play/Pause" />
-        <HotKey keys={["Control", "Enter"]} description="-> Create Task" />
+        <HotKey keys={["R"]} description={`-> ${t("reset")}`} />
+        <HotKey keys={["Backspace"]} description={`-> ${t("play_pause")}`} />
+        <HotKey
+          keys={["Control", "Enter"]}
+          description={`-> ${t("create_task")}`}
+        />
       </div>
     </footer>
   );

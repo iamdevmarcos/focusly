@@ -2,14 +2,14 @@ import type { MetaFunction } from "@remix-run/node";
 import { Footer } from "~/components/footer";
 import { Header } from "~/components/header";
 import { Timer } from "~/components/timer";
+import i18n from "~/i18n/config";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Focusly — Get Things Done, as Planned." },
+    { title: i18n.t("title") },
     {
       name: "description",
-      content:
-        "A modern Pomodoro app to boost your productivity and help you stay on track.",
+      content: i18n.t("description"),
     },
   ];
 };
