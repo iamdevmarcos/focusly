@@ -9,6 +9,7 @@ import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 import i18n from "./i18n/config";
+import { FocuslyProvider } from "./context/focusly-context";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -38,7 +39,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="font-sans">
-        {children}
+        <FocuslyProvider>{children}</FocuslyProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
