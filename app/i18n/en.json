@@ -5,5 +5,10 @@
   "play_pause": "Play/Pause",
   "create_task": "Create Task",
   "by": "by",
-  "and": "and"
+  "and": "and",
+  "session_completed": "Session completed! Time to rest! 😴 Focusly",
+  "session_reset": "Session reset! 🚀 Focusly",
+  "session_paused": "Session paused! ⏸️ Focusly",
+  "session_started": "Session started! 🔥 Focusly",
+  "sessions_completed": "Completed sessions"
 }

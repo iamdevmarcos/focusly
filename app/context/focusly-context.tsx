@@ -6,6 +6,8 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 interface FocuslyContextProps {
   timeLeft: number;
@@ -24,16 +26,25 @@ const FocuslyContext = createContext<FocuslyContextProps | undefined>(
 );
 
 export const FocuslyProvider = ({ children }: PropsWithChildren) => {
+  const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState(defaultTime);
   const [isRunning, setIsRunning] = useState(false);
   const [sessionsCompleted, setSessionsCompleted] = useState(0);
 
-  const startTimer = useCallback(() => setIsRunning(true), []);
-  const pauseTimer = useCallback(() => setIsRunning(false), []);
+  const startTimer = useCallback(() => {
+    setIsRunning(true);
+    toast(t("session_started"));
+  }, []);
+
+  const pauseTimer = useCallback(() => {
+    setIsRunning(false);
+    toast(t("session_paused"));
+  }, []);
 
   const resetTimer = useCallback(() => {
     setTimeLeft(defaultTime);
     setIsRunning(false);
+    toast(t("session_reset"));
   }, []);
 
   const setCustomTime = useCallback((value: number) => {
@@ -56,6 +67,7 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
       setSessionsCompleted((prev) => prev + 1);
       setIsRunning(false);
       setTimeLeft(defaultTime);
+      toast(t("session_completed"));
     }
   }, [timeLeft, isRunning]);
 

@@ -5,5 +5,10 @@
   "play_pause": "Iniciar/Pausar",
   "create_task": "Criar Tarefa",
   "by": "por",
-  "and": "+"
+  "and": "+",
+  "session_completed": "Sessão concluída! Hora de descansar!",
+  "session_reset": "Sessão reiniciada!",
+  "session_paused": "Sessão pausada!",
+  "session_started": "Sessão iniciada!",
+  "sessions_completed": "Sessões completadas"
 }
