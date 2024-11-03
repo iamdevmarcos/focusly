@@ -2,7 +2,7 @@
 module.exports = {
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
-  serverBuildPath: "api/index.js",
+  serverBuildPath: "build/server/index.js",
   publicPath: "/build/",
   serverDependenciesToBundle: ["@remix-run/vercel"],
   serverModuleFormat: "cjs",
