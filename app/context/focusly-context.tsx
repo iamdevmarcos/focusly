@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { useNotifications } from "./notifications-context";
 import { useSound } from "~/hooks/useSound";
+import { useWakeLock } from "~/hooks/useWakeLock";
 
 interface FocuslyContextProps {
   timeLeft: number;
@@ -31,31 +32,39 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation();
   const { playComplete } = useSound();
   const { sendNotification } = useNotifications();
+  const { requestWakeLock, releaseWakeLock } = useWakeLock();
 
   const [timeLeft, setTimeLeft] = useState(defaultTime);
   const [isRunning, setIsRunning] = useState(false);
   const [sessionsCompleted, setSessionsCompleted] = useState(0);
 
-  const startTimer = useCallback(() => {
-    setIsRunning(true);
-    toast(t("session_started"));
-  }, []);
-
-  const pauseTimer = useCallback(() => {
-    setIsRunning(false);
-    toast(t("session_paused"));
-  }, []);
-
   const resetTimer = useCallback(() => {
     setTimeLeft(defaultTime);
     setIsRunning(false);
+    releaseWakeLock();
     toast(t("session_reset"));
-  }, []);
+  }, [releaseWakeLock, t]);
 
-  const setCustomTime = useCallback((value: number) => {
-    setTimeLeft(value * 60);
+  const startTimer = useCallback(() => {
+    setIsRunning(true);
+    requestWakeLock();
+    toast(t("session_started"));
+  }, [requestWakeLock, t]);
+
+  const pauseTimer = useCallback(() => {
     setIsRunning(false);
-  }, []);
+    releaseWakeLock();
+    toast(t("session_paused"));
+  }, [releaseWakeLock, t]);
+
+  const setCustomTime = useCallback(
+    (value: number) => {
+      setTimeLeft(value * 60);
+      setIsRunning(false);
+      releaseWakeLock();
+    },
+    [releaseWakeLock],
+  );
 
   useEffect(() => {
     if (!isRunning || timeLeft <= 0) return;
@@ -70,14 +79,13 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (timeLeft === 0 && isRunning) {
       setSessionsCompleted((prev) => prev + 1);
-      setIsRunning(false);
-      setTimeLeft(defaultTime);
+      resetTimer();
 
       playComplete();
       toast(t("session_completed"));
       sendNotification(t("focusly_completed"), t("time_to_break"));
     }
-  }, [timeLeft, isRunning]);
+  }, [timeLeft, isRunning, resetTimer, playComplete, sendNotification, t]);
 
   return (
     <FocuslyContext.Provider
