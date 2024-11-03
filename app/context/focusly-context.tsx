@@ -22,7 +22,7 @@ interface FocuslyContextProps {
   setCustomTime: (value: number) => void;
 }
 
-const defaultTime = 25 * 60; // 25 minutes
+const defaultTime = 0.8 * 60; // 25 minutes
 
 const FocuslyContext = createContext<FocuslyContextProps | undefined>(
   undefined,
