@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "remix vite:dev",
-    "build": "remix vite:build",
+    "build": "npx remix vite:build",
     "start": "vercel dev",
-    "vercel-build": "remix build",
+    "vercel-build": "npx remix build",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "typecheck": "tsc"
   },
