@@ -10,5 +10,8 @@
   "session_reset": "Session reset! 🚀 Focusly",
   "session_paused": "Session paused! ⏸️ Focusly",
   "session_started": "Session started! 🔥 Focusly",
-  "sessions_completed": "Completed sessions"
+  "sessions_completed": "Completed sessions",
+  "notification_prompt": "Allow notifications to be informed when your focus session ends!",
+  "focusly_completed": "Focusly session completed!",
+  "time_to_break": "Time to take a break 🎉"
 }

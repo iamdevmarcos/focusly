@@ -11,6 +11,8 @@ import "./tailwind.css";
 import i18n from "./i18n/config";
 import { FocuslyProvider } from "./context/focusly-context";
 import { Toaster } from "sonner";
+import { NotificationsProvider } from "./context/notifications-context";
+import { useEffect } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -41,7 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="font-sans">
         <Toaster position="top-center" richColors />
-        <FocuslyProvider>{children}</FocuslyProvider>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -50,5 +52,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          console.log("Service Worker registrado com sucesso:", registration);
+        })
+        .catch((error) => {
+          console.log("Falha ao registrar o Service Worker:", error);
+        });
+    }
+  }, []);
+
+  return (
+    <NotificationsProvider>
+      <FocuslyProvider>
+        <Outlet />
+      </FocuslyProvider>
+    </NotificationsProvider>
+  );
 }

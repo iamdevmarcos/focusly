@@ -1,0 +1,22 @@
+{
+  "short_name": "Focusly",
+  "name": "Focusly — Get Things Done, as Planned. 🔥",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000000",
+  "description": "A modern and easy-to-use Pomodoro to help you get things done as planned."
+}

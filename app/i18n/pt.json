@@ -10,5 +10,8 @@
   "session_reset": "Sessão reiniciada!",
   "session_paused": "Sessão pausada!",
   "session_started": "Sessão iniciada!",
-  "sessions_completed": "Sessões completadas"
+  "sessions_completed": "Sessões completadas",
+  "notification_prompt": "Permita notificações para ser avisado quando sua sessão de foco terminar!",
+  "focusly_completed": "Sessão do Focusly concluída!",
+  "time_to_break": "Hora de fazer uma pausa 🎉"
 }

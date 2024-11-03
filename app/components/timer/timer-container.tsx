@@ -2,8 +2,12 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { useFocusly } from "~/context/focusly-context";
 import { formatMinutes } from "~/helpers/formatTime";
 import { TimerPresentation } from "./timer-presentation";
+import { useEffect } from "react";
+import { useNotifications } from "~/context/notifications-context";
 
 export const TimerContainer = () => {
+  const { showNotificationPrompt } = useNotifications();
+
   const {
     timeLeft,
     startTimer,
@@ -13,15 +17,17 @@ export const TimerContainer = () => {
     sessionsCompleted,
   } = useFocusly();
 
+  useEffect(() => {
+    if (isRunning) showNotificationPrompt();
+  }, [showNotificationPrompt, isRunning]);
+
   useHotkeys("R", resetTimer);
   useHotkeys(" ", isRunning ? pauseTimer : startTimer); // backspace key
   useHotkeys("meta+enter", () => window.alert("Criar tarefa"));
 
-  const formattedTimeLeft = formatMinutes(timeLeft);
-
   return (
     <TimerPresentation
-      timeLeft={formattedTimeLeft}
+      timeLeft={formatMinutes(timeLeft)}
       sessionsCompleted={sessionsCompleted}
       isRunning={isRunning}
       onReset={resetTimer}
