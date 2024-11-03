@@ -1,5 +1,5 @@
 /** @type {import('@remix-run/dev').AppConfig} */
-module.exports = {
+const config = {
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
   serverBuildPath: "api/index.js",
@@ -8,3 +8,5 @@ module.exports = {
   serverPlatform: "node",
   server: "@remix-run/vercel",
 };
+
+module.exports = config;
