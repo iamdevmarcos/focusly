@@ -1,12 +1,11 @@
 /** @type {import('@remix-run/dev').AppConfig} */
-const config = {
+module.exports = {
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
   serverBuildPath: "api/index.js",
   publicPath: "/build/",
+  serverDependenciesToBundle: ["@remix-run/vercel"],
   serverModuleFormat: "cjs",
   serverPlatform: "node",
   server: "@remix-run/vercel",
 };
-
-module.exports = config;
