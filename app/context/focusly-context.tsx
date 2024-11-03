@@ -9,6 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { useNotifications } from "./notifications-context";
+import { useSound } from "~/hooks/useSound";
 
 interface FocuslyContextProps {
   timeLeft: number;
@@ -20,7 +21,7 @@ interface FocuslyContextProps {
   setCustomTime: (value: number) => void;
 }
 
-const defaultTime = 0.3 * 60; // 25 minutes
+const defaultTime = 25 * 60; // 25 minutes
 
 const FocuslyContext = createContext<FocuslyContextProps | undefined>(
   undefined,
@@ -28,6 +29,7 @@ const FocuslyContext = createContext<FocuslyContextProps | undefined>(
 
 export const FocuslyProvider = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation();
+  const { playComplete } = useSound();
   const { sendNotification } = useNotifications();
 
   const [timeLeft, setTimeLeft] = useState(defaultTime);
@@ -71,6 +73,7 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
       setIsRunning(false);
       setTimeLeft(defaultTime);
 
+      playComplete();
       toast(t("session_completed"));
       sendNotification(t("focusly_completed"), t("time_to_break"));
     }
