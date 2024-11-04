@@ -20,6 +20,11 @@ export default {
       animation: {
         fadeIn: "fadeIn 0.5s ease-in-out",
       },
+      backgroundImage: {
+        "focusly-gradient": `
+          linear-gradient(to bottom left, #121214, #111, #000, #1a1a1a)
+        `,
+      },
     },
   },
   plugins: [],

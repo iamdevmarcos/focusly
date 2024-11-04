@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="flex h-screen flex-col items-center justify-between bg-focusly-bg-dark py-4 text-focusly-text-white">
+    <div className="bg-focusly-gradient flex h-screen flex-col items-center justify-between py-4 text-focusly-text-white">
       <Header />
       <TimerContainer />
       <Footer />
