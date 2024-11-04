@@ -44,7 +44,7 @@ export const useSound = () => {
   };
 
   const playComplete = () => {
-    return playSound({ source: "finish.mp3", duration: 8000 });
+    return playSound({ source: "finish.mp3", duration: 5000 });
   };
 
   return {

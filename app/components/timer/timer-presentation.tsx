@@ -4,6 +4,7 @@ interface TimerPresentationProps {
   timeLeft: string;
   sessionsCompleted: number;
   isRunning: boolean;
+  isResting: boolean;
   onReset: () => void;
   onPause: () => void;
 }
@@ -12,6 +13,7 @@ export const TimerPresentation = ({
   timeLeft,
   sessionsCompleted,
   isRunning,
+  isResting,
 }: TimerPresentationProps) => {
   const { t } = useTranslation();
 
@@ -23,7 +25,9 @@ export const TimerPresentation = ({
         <p
           className={`animate-fadeIn text-focusly-medium transition-opacity duration-500 ease-in-out`}
         >
-          {`🚀 ${t("sessions_completed")} -> ${sessionsCompleted} 🥳`}
+          {isResting
+            ? `💤 ${t("resting")} 💤`
+            : `🚀 ${t("sessions_completed")} -> ${sessionsCompleted} 🥳`}
         </p>
       )}
     </main>

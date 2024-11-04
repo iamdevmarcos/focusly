@@ -15,6 +15,7 @@ export const TimerContainer = () => {
     pauseTimer,
     isRunning,
     sessionsCompleted,
+    isResting,
   } = useFocusly();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export const TimerContainer = () => {
   }, [showNotificationPrompt, isRunning]);
 
   useHotkeys("R", resetTimer);
-  useHotkeys(" ", isRunning ? pauseTimer : startTimer); // backspace key
+  useHotkeys(" ", isRunning ? pauseTimer : startTimer); // Space key
   useHotkeys("meta+enter", () => window.alert("Criar tarefa"));
 
   return (
@@ -30,6 +31,7 @@ export const TimerContainer = () => {
       timeLeft={formatMinutes(timeLeft)}
       sessionsCompleted={sessionsCompleted}
       isRunning={isRunning}
+      isResting={isResting}
       onReset={resetTimer}
       onPause={pauseTimer}
     />
