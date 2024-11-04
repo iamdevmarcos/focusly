@@ -24,8 +24,8 @@ interface FocuslyContextProps {
   setRestTime: (value: number) => void;
 }
 
-const FOCUS_TIME_DEFAULT = 0.2 * 60; // 25 minutes
-const REST_TIME_DEFAULT = 0.1 * 60; // 5 minutes
+const FOCUS_TIME_DEFAULT = 25 * 60; // 25 minutes
+const REST_TIME_DEFAULT = 5 * 60; // 5 minutes
 
 const FocuslyContext = createContext<FocuslyContextProps | undefined>(
   undefined,
