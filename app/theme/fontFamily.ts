@@ -1,12 +1,3 @@
 export const fontFamily = {
-  sans: [
-    '"JetBrains Mono"',
-    "ui-sans-serif",
-    "system-ui",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-    '"Noto Color Emoji"',
-  ],
+  sans: ['"JetBrains Mono"', "ui-sans-serif", "system-ui", "sans-serif"],
 };
