@@ -24,6 +24,9 @@ export default {
         "focusly-gradient": `
           linear-gradient(to bottom left, #121214, #111, #000, #1a1a1a)
         `,
+        "focusly-gradient-white": `
+          linear-gradient(to bottom left, #333, #f9f9f9, #f2f2f2, #ececec, #e6e6e6);
+        `,
       },
     },
   },

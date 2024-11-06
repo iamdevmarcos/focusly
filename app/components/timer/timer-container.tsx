@@ -16,6 +16,7 @@ export const TimerContainer = () => {
     isRunning,
     sessionsCompleted,
     isResting,
+    skipRestTime,
   } = useFocusly();
 
   useEffect(() => {
@@ -34,6 +35,8 @@ export const TimerContainer = () => {
       isResting={isResting}
       onReset={resetTimer}
       onPause={pauseTimer}
+      skipRestTime={skipRestTime}
+      startTimer={startTimer}
     />
   );
 };

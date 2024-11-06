@@ -22,10 +22,11 @@ interface FocuslyContextProps {
   resetTimer: () => void;
   setCustomTime: (value: number) => void;
   setRestTime: (value: number) => void;
+  skipRestTime: () => void;
 }
 
-const FOCUS_TIME_DEFAULT = 25 * 60; // 25 minutes
-const REST_TIME_DEFAULT = 5 * 60; // 5 minutes
+const FOCUS_TIME_DEFAULT = 0.2 * 60; // 25 minutes
+const REST_TIME_DEFAULT = 0.1 * 60; // 5 minutes
 
 const FocuslyContext = createContext<FocuslyContextProps | undefined>(
   undefined,
@@ -104,6 +105,14 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
     sendNotification(t("focusly_completed"), t("time_to_break"));
   }, [t, sendNotification, restTime]);
 
+  const skipRestTime = useCallback(() => {
+    if (isResting) {
+      startNewFocusSession();
+      toggleRunningState(true);
+      toast(t("rest_skipped"));
+    }
+  }, [isResting, startNewFocusSession, t]);
+
   useEffect(() => handleTimerTick(), [handleTimerTick]);
 
   useEffect(() => {
@@ -137,6 +146,7 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
         resetTimer,
         setCustomTime,
         setRestTime,
+        skipRestTime,
       }}
     >
       {children}
