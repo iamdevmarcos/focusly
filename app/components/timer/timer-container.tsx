@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useFocusly } from "~/context/focusly-context";
 import { formatMinutes } from "~/helpers/formatTime";
 import { TimerPresentation } from "./timer-presentation";
-import { useEffect } from "react";
 import { useNotifications } from "~/context/notifications-context";
 
 export const TimerContainer = () => {
@@ -27,6 +27,11 @@ export const TimerContainer = () => {
   useHotkeys(" ", isRunning ? pauseTimer : startTimer); // Space key
   useHotkeys("meta+enter", () => window.alert("Criar tarefa"));
 
+  const showSessionCompletedMessage = isRunning && !isResting;
+  const showRestControls = sessionsCompleted >= 1 && isResting;
+  const showStartRestButton = showRestControls && !isRunning;
+  const showFocusButton = sessionsCompleted >= 1 && !isResting && !isRunning;
+
   return (
     <TimerPresentation
       timeLeft={formatMinutes(timeLeft)}
@@ -37,6 +42,10 @@ export const TimerContainer = () => {
       onPause={pauseTimer}
       skipRestTime={skipRestTime}
       startTimer={startTimer}
+      showSessionCompletedMessage={showSessionCompletedMessage}
+      showFocusButton={showFocusButton}
+      showRestControls={showRestControls}
+      showStartRestButton={showStartRestButton}
     />
   );
 };
