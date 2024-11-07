@@ -95,6 +95,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <meta name="twitter:image" content="/images/logo.png" />
         <meta name="twitter:site" content="@yourhandle" />
+        <script
+          type="module"
+          src="https://unpkg.com/@material-tailwind/html@latest/scripts/tooltip.js"
+        ></script>
 
         <Meta />
         <Links />

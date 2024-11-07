@@ -49,8 +49,6 @@ export const Footer = () => {
       <div className="flex flex-col gap-2.5">
         <HotKey keys={["R"]} description={`-> ${t("reset")}`} />
         <HotKey keys={["Backspace"]} description={`-> ${t("play_pause")}`} />
-        <HotKey keys={["Control", "K"]} description={`-> Command Bar`} />
-
         <HotKey
           keys={["Control", "Enter"]}
           description={`-> ${t("create_task")}`}
