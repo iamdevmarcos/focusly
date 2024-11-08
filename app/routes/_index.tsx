@@ -1,7 +1,7 @@
-import type { MetaFunction } from "@remix-run/node";
+import { json, LoaderFunction, type MetaFunction } from "@remix-run/node";
 import { KBarProvider } from "kbar";
 import CommandBar from "~/components/commands";
-import { Footer } from "~/components/footer";
+import { FooterContainer } from "~/components/footer/footer-container";
 import { Header } from "~/components/header";
 import { TimerContainer } from "~/components/timer/timer-container";
 import { useKbarActions } from "~/context/kbar-actions-context";
@@ -17,6 +17,26 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const ip =
+    request.headers.get("X-Forwarded-For") ||
+    request.headers.get("x-real-ip") ||
+    "me";
+
+  try {
+    const response = await fetch(`https://ipapi.co/${ip}/json/`);
+    const locationData = await response.json();
+
+    console.log({ locationData });
+    const city = locationData.city || "California";
+    const country = locationData.country_name || "USA";
+
+    return json({ city, country });
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
 export default function Index() {
   const { actions } = useKbarActions();
 
@@ -26,7 +46,7 @@ export default function Index() {
         <CommandBar />
         <Header />
         <TimerContainer />
-        <Footer />
+        <FooterContainer />
       </div>
     </KBarProvider>
   );
