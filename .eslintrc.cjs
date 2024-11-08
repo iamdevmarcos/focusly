@@ -1,9 +1,3 @@
-/**
- * This is intended to be a basic starting point for linting in your app.
- * It relies on recommended configs out of the box for simplicity, but you can
- * and should modify this configuration to best suit your team's needs.
- */
-
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
@@ -21,11 +15,9 @@ module.exports = {
   },
   ignorePatterns: ["!**/.server", "!**/.client"],
 
-  // Base config
   extends: ["eslint:recommended"],
 
   overrides: [
-    // React
     {
       files: ["**/*.{js,jsx,ts,tsx}"],
       plugins: ["react", "jsx-a11y"],
@@ -37,6 +29,8 @@ module.exports = {
       ],
       rules: {
         "react-hooks/exhaustive-deps": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
       },
       settings: {
         react: {

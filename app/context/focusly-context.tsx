@@ -13,6 +13,8 @@ import { useSound } from "~/hooks/useSound";
 import { useWakeLock } from "~/hooks/useWakeLock";
 
 interface FocuslyContextProps {
+  focusTime: number;
+  restTime: number;
   timeLeft: number;
   isRunning: boolean;
   sessionsCompleted: number;
@@ -25,8 +27,8 @@ interface FocuslyContextProps {
   skipRestTime: () => void;
 }
 
-const FOCUS_TIME_DEFAULT = 0.2 * 60; // 25 minutes
-const REST_TIME_DEFAULT = 0.1 * 60; // 5 minutes
+const FOCUS_TIME_DEFAULT = 25 * 60; // 25 minutes
+const REST_TIME_DEFAULT = 5 * 60; // 5 minutes
 
 const FocuslyContext = createContext<FocuslyContextProps | undefined>(
   undefined,
@@ -38,22 +40,23 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
   const { sendNotification } = useNotifications();
   const { requestWakeLock, releaseWakeLock } = useWakeLock();
 
-  const [timeLeft, setTimeLeft] = useState(FOCUS_TIME_DEFAULT);
+  const [focusTime, setFocusTime] = useState(FOCUS_TIME_DEFAULT);
+  const [restTime, setRestTimeState] = useState(REST_TIME_DEFAULT);
+  const [timeLeft, setTimeLeft] = useState(focusTime);
   const [isRunning, setIsRunning] = useState(false);
   const [sessionsCompleted, setSessionsCompleted] = useState(0);
   const [isResting, setIsResting] = useState(false);
-  const [restTime, setRestTimeState] = useState(REST_TIME_DEFAULT);
 
   const updateTimeLeft = (time: number) => setTimeLeft(time);
   const toggleRunningState = (state: boolean) => setIsRunning(state);
 
   const resetTimer = useCallback(() => {
-    const nextTime = isResting ? restTime : FOCUS_TIME_DEFAULT;
+    const nextTime = isResting ? restTime : focusTime;
     updateTimeLeft(nextTime);
     toggleRunningState(false);
     releaseWakeLock();
     toast(t(isResting ? "rest_reset" : "session_reset"));
-  }, [releaseWakeLock, t, isResting, restTime]);
+  }, [releaseWakeLock, t, isResting, focusTime, restTime]);
 
   const startTimer = useCallback(() => {
     toggleRunningState(true);
@@ -69,16 +72,23 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
 
   const setCustomTime = useCallback(
     (value: number) => {
-      updateTimeLeft(value * 60);
+      const newFocusTime = value * 60;
+      setFocusTime(newFocusTime);
+      if (!isResting) updateTimeLeft(newFocusTime);
       toggleRunningState(false);
       releaseWakeLock();
     },
-    [releaseWakeLock],
+    [releaseWakeLock, isResting],
   );
 
-  const setRestTime = useCallback((value: number) => {
-    setRestTimeState(value * 60);
-  }, []);
+  const setRestTime = useCallback(
+    (value: number) => {
+      const newRestTime = value * 60;
+      setRestTimeState(newRestTime);
+      if (isResting) updateTimeLeft(newRestTime);
+    },
+    [isResting],
+  );
 
   const handleTimerTick = useCallback(() => {
     if (!isRunning || timeLeft <= 0) return;
@@ -92,10 +102,10 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
 
   const startNewFocusSession = useCallback(() => {
     setIsResting(false);
-    updateTimeLeft(FOCUS_TIME_DEFAULT);
+    updateTimeLeft(focusTime);
     toast(t("rest_completed"));
     sendNotification(t("rest_completed"), t("back_to_focus"));
-  }, [t, sendNotification]);
+  }, [t, sendNotification, focusTime]);
 
   const startRestSession = useCallback(() => {
     setSessionsCompleted((prev) => prev + 1);
@@ -137,6 +147,8 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
   return (
     <FocuslyContext.Provider
       value={{
+        focusTime,
+        restTime,
         isRunning,
         timeLeft,
         sessionsCompleted,

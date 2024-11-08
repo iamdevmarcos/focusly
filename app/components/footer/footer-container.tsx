@@ -27,7 +27,7 @@ export const FooterContainer = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, 2000);
+    }, 10000);
 
     return () => clearInterval(intervalId);
   }, []);

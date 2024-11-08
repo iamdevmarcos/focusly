@@ -2,7 +2,7 @@ import { json, LoaderFunction, type MetaFunction } from "@remix-run/node";
 import { KBarProvider } from "kbar";
 import CommandBar from "~/components/commands";
 import { FooterContainer } from "~/components/footer/footer-container";
-import { Header } from "~/components/header";
+import { HeaderContainer } from "~/components/header/header-container";
 import { TimerContainer } from "~/components/timer/timer-container";
 import { useKbarActions } from "~/context/kbar-actions-context";
 import i18n from "~/i18n/config";
@@ -44,7 +44,7 @@ export default function Index() {
     <KBarProvider actions={actions}>
       <div className="flex h-screen flex-col items-center justify-between bg-focusly-gradient py-4 text-focusly-text-white">
         <CommandBar />
-        <Header />
+        <HeaderContainer />
         <TimerContainer />
         <FooterContainer />
       </div>
