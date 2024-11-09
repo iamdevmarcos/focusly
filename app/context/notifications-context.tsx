@@ -67,9 +67,7 @@ export const NotificationsProvider = ({ children }: PropsWithChildren) => {
 export const useNotifications = () => {
   const context = useContext(NotificationsContext);
   if (!context) {
-    throw new Error(
-      "useNotification deve ser usado dentro de um NotificationProvider",
-    );
+    throw new Error("useNotification must be use within NotificationProvider");
   }
   return context;
 };

@@ -1,8 +1,10 @@
 import { KeyboardEvent, useEffect, useState } from "react";
 import { useLoaderData } from "@remix-run/react";
 import { FooterPresentation } from "./footer-presentation";
+import { useTranslation } from "react-i18next";
 
 export const FooterContainer = () => {
+  const { t } = useTranslation();
   const { city, country } = useLoaderData<{ city: string; country: string }>();
 
   const [videoUrl, setVideoUrl] = useState(
@@ -13,7 +15,7 @@ export const FooterContainer = () => {
 
   const texts = [
     "Focusly — by @marcosmendes 🔥",
-    `Last visitor from: ${city}/${country}`,
+    `${t("last_visitor")} ${city}/${country}`,
   ];
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {

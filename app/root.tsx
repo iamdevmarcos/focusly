@@ -68,8 +68,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           name="keywords"
           content="Pomodoro, Productivity, Task Management, Focusly, Get Things Done, Time Management"
         />
-        <meta name="author" content="Your Name or Company" />
-        <link rel="canonical" href="https://yourwebsite.com" />
+        <meta name="author" content="Focusly - Marcos Mendes" />
+        <link rel="canonical" href="https://focusly.com.br" />
 
         <meta property="og:type" content="website" />
         <meta
@@ -81,7 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           content="A modern and easy-to-use Pomodoro to help you get things done as planned."
         />
         <meta property="og:image" content="/images/logo.png" />
-        <meta property="og:url" content="https://yourwebsite.com" />
+        <meta property="og:url" content="https://focusly.com.br" />
         <meta property="og:site_name" content="Focusly" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -94,7 +94,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           content="A modern and easy-to-use Pomodoro to help you get things done as planned."
         />
         <meta name="twitter:image" content="/images/logo.png" />
-        <meta name="twitter:site" content="@yourhandle" />
+        <meta name="twitter:site" content="@focuslybr" />
         <script
           type="module"
           src="https://unpkg.com/@material-tailwind/html@latest/scripts/tooltip.js"

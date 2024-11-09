@@ -13,5 +13,17 @@
   "sessions_completed": "Sessões completadas",
   "notification_prompt": "Permita notificações para ser avisado quando sua sessão de foco terminar!",
   "focusly_completed": "Sessão do Focusly concluída!",
-  "time_to_break": "Hora de fazer uma pausa 🎉"
+  "time_to_break": "Hora de fazer uma pausa 🎉",
+  "last_visitor": "Último visitante de:",
+  "config.focus_time": "Tempo de foco (min):",
+  "config.rest_time": "Tempo de descanso (min):",
+  "config.button": "Aplicar Mudanças",
+  "config.title": "Configurações ⚙️",
+  "actions": {
+    "play": "🚀 Iniciar Sessão",
+    "pause": "⏸️ Pausar Sessão",
+    "reset": "🔄 Reiniciar Sessão",
+    "create_task": "🗒️ Criar nova tarefa",
+    "commands": "comandos"
+  }
 }

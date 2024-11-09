@@ -4,6 +4,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { Button } from "../button";
 import { Suspense } from "react";
 import Modal from "../modal";
+import { t } from "i18next";
 
 interface HeaderPresentationProps {
   query: any;
@@ -61,11 +62,15 @@ const HeaderPresentation = ({
       />
 
       <Suspense fallback={null}>
-        <Modal isOpen={isOpen} closeModal={closeModal} title="Configurações ⚙️">
+        <Modal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          title={t("config.title")}
+        >
           <div className="flex flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
               <label htmlFor="focusTime" className="text-focusly-text-white">
-                Tempo Personalizado (min):
+                {t("config.focus_time")}
               </label>
               <input
                 id="focusTime"
@@ -82,7 +87,7 @@ const HeaderPresentation = ({
 
             <div className="flex items-center justify-between">
               <label htmlFor="restTime" className="text-focusly-text-white">
-                Tempo de Descanso (min):
+                {t("config.rest_time")}
               </label>
               <input
                 id="restTime"
@@ -101,7 +106,7 @@ const HeaderPresentation = ({
               onClick={applySettings}
               className="scale-100 rounded-sm border border-focusly-text-gray bg-focusly-gradient px-8 py-4 text-focusly-normal font-semibold text-focusly-text-gray opacity-100 transition-opacity duration-300 ease-out hover:border-focusly-bg-dark hover:bg-focusly-gradient-white hover:text-focusly-bg-dark"
             >
-              Aplicar
+              {t("config.button")}
             </button>
           </div>
         </Modal>

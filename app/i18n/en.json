@@ -13,5 +13,17 @@
   "sessions_completed": "Completed sessions",
   "notification_prompt": "Allow notifications to be informed when your focus session ends!",
   "focusly_completed": "Focusly session completed!",
-  "time_to_break": "Time to take a break 🎉"
+  "time_to_break": "Time to take a break 🎉",
+  "last_visitor": "Last visitor from:",
+  "config.focus_time": "Focus time (min):",
+  "config.rest_time": "Rest time (min):",
+  "config.button": "Update settings",
+  "config.title": "Configurations ⚙️",
+  "actions": {
+    "play": "🚀 Start Session",
+    "pause": "⏸️ Pause Session",
+    "reset": "🔄 Reset Session",
+    "create_task": "🗒️ Create new task",
+    "commands": "commands"
+  }
 }
