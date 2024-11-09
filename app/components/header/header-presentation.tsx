@@ -4,7 +4,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { Button } from "../button";
 import { Suspense } from "react";
 import Modal from "../modal";
-import { t } from "i18next";
+import i18n from "~/i18n/config";
 
 interface HeaderPresentationProps {
   query: any;
@@ -65,12 +65,12 @@ const HeaderPresentation = ({
         <Modal
           isOpen={isOpen}
           closeModal={closeModal}
-          title={t("config.title")}
+          title={i18n.t("config.title")}
         >
           <div className="flex flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
               <label htmlFor="focusTime" className="text-focusly-text-white">
-                {t("config.focus_time")}
+                {i18n.t("config.focus_time")}
               </label>
               <input
                 id="focusTime"
@@ -87,7 +87,7 @@ const HeaderPresentation = ({
 
             <div className="flex items-center justify-between">
               <label htmlFor="restTime" className="text-focusly-text-white">
-                {t("config.rest_time")}
+                {i18n.t("config.rest_time")}
               </label>
               <input
                 id="restTime"
@@ -102,11 +102,41 @@ const HeaderPresentation = ({
               />
             </div>
 
+            <div className="flex items-center justify-between gap-2">
+              <label htmlFor="language" className="text-focusly-text-white">
+                {i18n.t("config.languageTitle")}:
+              </label>
+              <div className="flex items-center gap-4">
+                <label className="flex items-center gap-2 text-focusly-text-white">
+                  <input
+                    type="radio"
+                    name="language"
+                    value="pt"
+                    checked={i18n.language === "pt"}
+                    onChange={() => i18n.changeLanguage("pt")}
+                    className="appearance-none rounded-sm border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-gray-500"
+                  />
+                  {i18n.t("config.portuguese")}
+                </label>
+                <label className="flex items-center gap-2 text-focusly-text-white">
+                  <input
+                    type="radio"
+                    name="language"
+                    value="en"
+                    checked={i18n.language === "en"}
+                    onChange={() => i18n.changeLanguage("en")}
+                    className="appearance-none rounded-sm border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-gray-500"
+                  />
+                  {i18n.t("config.english")}
+                </label>
+              </div>
+            </div>
+
             <button
               onClick={applySettings}
               className="scale-100 rounded-sm border border-focusly-text-gray bg-focusly-gradient px-8 py-4 text-focusly-normal font-semibold text-focusly-text-gray opacity-100 transition-opacity duration-300 ease-out hover:border-focusly-bg-dark hover:bg-focusly-gradient-white hover:text-focusly-bg-dark"
             >
-              {t("config.button")}
+              {i18n.t("config.button")}
             </button>
           </div>
         </Modal>
