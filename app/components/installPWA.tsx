@@ -8,8 +8,15 @@ export const InstallPWA = () => {
   const [isSafari, setIsSafari] = useState(false);
   const [isSecure, setIsSecure] = useState(false);
   const [isArcBrowser, setIsArcBrowser] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
+    const checkIfInstalled = () => {
+      setIsInstalled(window.matchMedia("(display-mode: standalone)").matches);
+    };
+
+    window.addEventListener("load", checkIfInstalled);
+
     const secureProtocol = window.location.protocol === "https:";
     setIsSecure(secureProtocol);
 
@@ -34,11 +41,13 @@ export const InstallPWA = () => {
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
-    return () =>
+    return () => {
       window.removeEventListener(
         "beforeinstallprompt",
         handleBeforeInstallPrompt,
       );
+      window.removeEventListener("load", checkIfInstalled);
+    };
   }, []);
 
   const handleInstallClick = () => {
@@ -48,12 +57,13 @@ export const InstallPWA = () => {
     deferredPrompt.userChoice.then(() => {
       setDeferredPrompt(null);
       setIsInstallable(false);
+      setIsInstalled(true);
     });
   };
 
-  if (!isSecure || isArcBrowser) return null;
+  if (!isSecure || isArcBrowser || isInstalled) return <></>;
 
-  if (isInstallable) {
+  if (isInstallable && (!isIOS || !isSafari)) {
     return (
       <button
         onClick={handleInstallClick}
@@ -79,5 +89,5 @@ export const InstallPWA = () => {
     );
   }
 
-  return null;
+  return <></>;
 };
