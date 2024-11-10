@@ -7,6 +7,7 @@ export const InstallPWA = () => {
   const [isIOS, setIsIOS] = useState(false);
   const [isSafari, setIsSafari] = useState(false);
   const [isSecure, setIsSecure] = useState(false);
+  const [isArcBrowser, setIsArcBrowser] = useState(false);
 
   useEffect(() => {
     const secureProtocol = window.location.protocol === "https:";
@@ -21,6 +22,9 @@ export const InstallPWA = () => {
     const isSafariBrowser =
       /^((?!chrome|android).)*safari/i.test(userAgent) && isIOSDevice;
     setIsSafari(isSafariBrowser);
+
+    const isArc = userAgent.includes("Arc");
+    setIsArcBrowser(isArc);
 
     const handleBeforeInstallPrompt = (event: any) => {
       event.preventDefault();
@@ -47,7 +51,7 @@ export const InstallPWA = () => {
     });
   };
 
-  if (!isSecure) return <></>;
+  if (!isSecure || isArcBrowser) return null;
 
   if (isInstallable) {
     return (
@@ -75,5 +79,5 @@ export const InstallPWA = () => {
     );
   }
 
-  return <></>;
+  return null;
 };

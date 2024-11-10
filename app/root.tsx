@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link rel="apple-touch-icon" sizes="152x152" href="/images/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png" />
         <link rel="apple-touch-icon" sizes="167x167" href="/images/logo.png" />
-
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
