@@ -26,6 +26,9 @@
   "focus.input": "Enter rest time",
   "rest.input": "Enter focus time",
   "ytVideo.input": "Paste the video URL and press enter",
+  "startFocus": "Start focus 🔥",
+  "skipRestFocus": "Skip rest",
+  "startRestFocus": "Start rest",
   "actions": {
     "play": "🚀 Start Session",
     "pause": "⏸️ Pause Session",

@@ -30,7 +30,11 @@ export const TimerContainer = () => {
   const showSessionCompletedMessage = isRunning && !isResting;
   const showRestControls = sessionsCompleted >= 1 && isResting;
   const showStartRestButton = showRestControls && !isRunning;
-  const showFocusButton = sessionsCompleted >= 1 && !isResting && !isRunning;
+  const showFocusButtonDesktop =
+    sessionsCompleted >= 1 && !isResting && !isRunning;
+
+  const showFocusButtonMobile =
+    !isRunning && !isResting && !showSessionCompletedMessage;
 
   return (
     <TimerPresentation
@@ -43,7 +47,8 @@ export const TimerContainer = () => {
       skipRestTime={skipRestTime}
       startTimer={startTimer}
       showSessionCompletedMessage={showSessionCompletedMessage}
-      showFocusButton={showFocusButton}
+      showFocusButtonMobile={showFocusButtonMobile}
+      showFocusButtonDesktop={showFocusButtonDesktop}
       showRestControls={showRestControls}
       showStartRestButton={showStartRestButton}
     />

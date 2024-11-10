@@ -21,8 +21,8 @@ export const FooterPresentation = ({
   const { t } = useTranslation();
 
   return (
-    <footer className="mb-5 flex w-screen flex-row items-end justify-between px-20">
-      <div className="flex flex-col items-start gap-4">
+    <footer className="mb-5 flex w-screen flex-row items-center justify-center px-20 md:items-end md:justify-between">
+      <div className="flex min-w-max flex-col items-center gap-4 md:items-start">
         <div className="group flex flex-col gap-4">
           <input
             placeholder={t("ytVideo.input")}
@@ -34,12 +34,12 @@ export const FooterPresentation = ({
           <YoutubePlayer videoUrl={videoUrl} />
         </div>
 
-        <p className="text-focusly-normal transition-opacity duration-1000 ease-in-out">
+        <p className="text-center text-[14px] transition-opacity duration-1000 ease-in-out md:text-focusly-normal">
           {texts[textIndex]}
         </p>
       </div>
 
-      <div className="flex flex-col gap-2.5">
+      <div className="hidden md:flex md:flex-col md:gap-2.5">
         <HotKey keys={["R"]} description={`-> ${t("reset")}`} />
         <HotKey keys={["Backspace"]} description={`-> ${t("play_pause")}`} />
         <HotKey
