@@ -14,6 +14,7 @@ import { Toaster } from "sonner";
 import { NotificationsProvider } from "./context/notifications-context";
 import { useEffect } from "react";
 import { KbarActionsProvider } from "./context/kbar-actions-context";
+import { TasksProvider } from "./context/tasksContext";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -60,39 +61,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/images/logo.png" />
 
-        <meta
-          name="description"
-          content="A modern and easy-to-use Pomodoro to help you get things done as planned. Focusly is your productivity companion."
-        />
-        <meta
-          name="keywords"
-          content="Pomodoro, Productivity, Task Management, Focusly, Get Things Done, Time Management"
-        />
-        <meta name="author" content="Focusly - Marcos Mendes" />
-        <link rel="canonical" href="https://focusly.com.br" />
+        <meta name="description" content={i18n.t("description")} />
+        <meta name="keywords" content={i18n.t("keywords")} />
+        <meta name="author" content="SupaWave" />
+        <link rel="canonical" href="https://withfocusly.com/" />
 
         <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Focusly — Get Things Done, as Planned. 🔥"
-        />
-        <meta
-          property="og:description"
-          content="A modern and easy-to-use Pomodoro to help you get things done as planned."
-        />
+        <meta property="og:title" content={i18n.t("title")} />
+        <meta property="og:description" content={i18n.t("description")} />
         <meta property="og:image" content="/images/logo.png" />
-        <meta property="og:url" content="https://focusly.com.br" />
+        <meta property="og:url" content="https://withfocusly.com/" />
         <meta property="og:site_name" content="Focusly" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Focusly — Get Things Done, as Planned. 🔥"
-        />
-        <meta
-          name="twitter:description"
-          content="A modern and easy-to-use Pomodoro to help you get things done as planned."
-        />
+        <meta name="twitter:title" content={i18n.t("title")} />
+        <meta name="twitter:description" content={i18n.t("description")} />
         <meta name="twitter:image" content="/images/logo.png" />
         <meta name="twitter:site" content="@focuslybr" />
         <script
@@ -130,11 +113,13 @@ export default function App() {
 
   return (
     <NotificationsProvider>
-      <FocuslyProvider>
-        <KbarActionsProvider>
-          <Outlet />
-        </KbarActionsProvider>
-      </FocuslyProvider>
+      <TasksProvider>
+        <FocuslyProvider>
+          <KbarActionsProvider>
+            <Outlet />
+          </KbarActionsProvider>
+        </FocuslyProvider>
+      </TasksProvider>
     </NotificationsProvider>
   );
 }
