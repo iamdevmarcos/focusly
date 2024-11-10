@@ -5,6 +5,7 @@ import { Button } from "../button";
 import { Suspense } from "react";
 import Modal from "../modal";
 import i18n from "~/i18n/config";
+import { InstallPWA } from "../installPWA";
 
 interface HeaderPresentationProps {
   query: any;
@@ -55,6 +56,8 @@ const HeaderPresentation = ({
           control + k
         </div>
       </div>
+
+      <InstallPWA />
 
       <Button
         icon={<IoSettingsOutline className="h-8 w-8" />}
