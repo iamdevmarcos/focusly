@@ -34,7 +34,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return json({ city, country });
   } catch (error) {
     console.log({ error });
-    return null;
+    return json({ city: "California", country: "USA" });
   }
 };
 

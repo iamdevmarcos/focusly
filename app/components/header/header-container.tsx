@@ -9,13 +9,18 @@ export const HeaderContainer = () => {
   const { isOpen, openModal, closeModal } = useModal();
   const { setCustomTime, setRestTime, focusTime, restTime } = useFocusly();
 
-  const [tempFocusTime, setTempFocusTime] = useState(
+  const [tempFocusTime, setTempFocusTime] = useState<number | undefined>(
     Math.floor(focusTime / 60),
   );
   const [tempRestTime, setTempRestTime] = useState(Math.floor(restTime / 60));
 
   const applySettings = () => {
-    if (tempFocusTime > 0 && tempRestTime > 0) {
+    if (
+      tempFocusTime &&
+      tempFocusTime > 0 &&
+      tempRestTime &&
+      tempRestTime > 0
+    ) {
       setCustomTime(tempFocusTime);
       setRestTime(tempRestTime);
       closeModal();

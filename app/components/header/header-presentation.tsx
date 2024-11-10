@@ -13,10 +13,10 @@ interface HeaderPresentationProps {
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
-  tempFocusTime: number;
-  setTempFocusTime: (value: number) => void;
-  tempRestTime: number;
-  setTempRestTime: (value: number) => void;
+  tempFocusTime: number | undefined;
+  setTempFocusTime: (value: number | undefined) => void;
+  tempRestTime: number | undefined;
+  setTempRestTime: (value: number | undefined) => void;
   applySettings: () => void;
 }
 
@@ -70,10 +70,9 @@ const HeaderPresentation = ({
                 <input
                   id="focusTime"
                   type="number"
-                  min="1"
                   value={tempFocusTime}
                   onChange={(e) =>
-                    setTempFocusTime(parseInt(e.target.value, 10) || 1)
+                    setTempFocusTime(parseInt(e.target.value, 10) || undefined)
                   }
                   placeholder={t("rest.input")}
                   className="peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out"
@@ -87,10 +86,9 @@ const HeaderPresentation = ({
                 <input
                   id="restTime"
                   type="number"
-                  min="1"
                   value={tempRestTime}
                   onChange={(e) =>
-                    setTempRestTime(parseInt(e.target.value, 10) || 1)
+                    setTempRestTime(parseInt(e.target.value, 10) || undefined)
                   }
                   placeholder={t("focus_input")}
                   className="peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out"
