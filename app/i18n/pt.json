@@ -23,11 +23,14 @@
   "config.languageTitle": "Idioma",
   "config.portuguese": "🇧🇷 Português",
   "config.english": "🇺🇸 Inglês",
+  "focus.input": "Digite o tempo de foco",
+  "rest.input": "Digite o tempo de descanso",
+  "ytVideo.input": "Cole a URL do video e pressione enter",
   "actions": {
     "play": "🚀 Iniciar Sessão",
     "pause": "⏸️ Pausar Sessão",
     "reset": "🔄 Reiniciar Sessão",
     "create_task": "🗒️ Criar nova tarefa",
-    "commands": "comandos"
+    "commands": "Lista de Comandos"
   }
 }

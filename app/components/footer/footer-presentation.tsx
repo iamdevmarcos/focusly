@@ -25,7 +25,7 @@ export const FooterPresentation = ({
       <div className="flex flex-col items-start gap-4">
         <div className="group flex flex-col gap-4">
           <input
-            placeholder="Paste the video URL and press enter"
+            placeholder={t("ytVideo.input")}
             className={`${
               showInput ? "block" : "hidden"
             } peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out group-hover:block`}
@@ -43,8 +43,8 @@ export const FooterPresentation = ({
         <HotKey keys={["R"]} description={`-> ${t("reset")}`} />
         <HotKey keys={["Backspace"]} description={`-> ${t("play_pause")}`} />
         <HotKey
-          keys={["Control", "Enter"]}
-          description={`-> ${t("create_task")}`}
+          keys={["Control", "K"]}
+          description={`-> ${t("actions.commands")}`}
         />
       </div>
     </footer>

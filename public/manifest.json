@@ -1,7 +1,6 @@
 {
-  "short_name": "Focusly",
-  "name": "Focusly 🔥",
-  "description": "A modern and easy-to-use Pomodoro to help you get things done as planned.",
+  "name": "Focusly",
+  "description": "A modern and easy-to-use Pomodoro to help you get things done as planned. 🔥",
   "icons": [
     {
       "src": "/images/logo.png",

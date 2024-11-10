@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useTasks } from "~/context/tasksContext";
 
 interface TimerPresentationProps {
   timeLeft: string;
@@ -42,39 +41,31 @@ export const TimerPresentation = ({
   showStartRestButton,
 }: TimerPresentationProps) => {
   const { t } = useTranslation();
-  const { tasks } = useTasks();
 
   return (
-    <main className="flex items-center justify-center gap-16">
-      <div className="flex-col items-center gap-8 text-focusly-heading">
-        <h1>{timeLeft}</h1>
+    <main className="flex flex-col items-center gap-4 text-focusly-heading">
+      <h1>{timeLeft}</h1>
 
-        {showSessionCompletedMessage && (
-          <p className="animate-fadeIn text-focusly-medium transition-opacity duration-500 ease-in-out">
-            {`${t("sessions_completed")} -> ${sessionsCompleted} 🥳`}
-          </p>
-        )}
+      {showSessionCompletedMessage && (
+        <p className="animate-fadeIn text-focusly-medium transition-opacity duration-500 ease-in-out">
+          {`${t("sessions_completed")} -> ${sessionsCompleted} 🥳`}
+        </p>
+      )}
 
-        {showFocusButton && (
-          <div className="flex items-center gap-4">
-            <ActionButton onClick={startTimer}>Iniciar foco 🔥</ActionButton>
-          </div>
-        )}
+      {showFocusButton && (
+        <div className="flex items-center gap-4">
+          <ActionButton onClick={startTimer}>Iniciar foco 🔥</ActionButton>
+        </div>
+      )}
 
-        {showRestControls && (
-          <div className="flex items-center gap-4">
-            <ActionButton onClick={skipRestTime}>Pular descanso</ActionButton>
-            {showStartRestButton && (
-              <ActionButton onClick={startTimer}>Iniciar descanso</ActionButton>
-            )}
-          </div>
-        )}
-      </div>
-
-      <div className="">
-        <h1 className="text-focusly-medium">Tarefas</h1>
-        {tasks?.map((task) => <p key={task.id}>{task.title}</p>)}
-      </div>
+      {showRestControls && (
+        <div className="flex items-center gap-4">
+          <ActionButton onClick={skipRestTime}>Pular descanso</ActionButton>
+          {showStartRestButton && (
+            <ActionButton onClick={startTimer}>Iniciar descanso</ActionButton>
+          )}
+        </div>
+      )}
     </main>
   );
 };
