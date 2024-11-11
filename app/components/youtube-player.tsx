@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useScreenSize } from "~/hooks/useScreenSize";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
@@ -26,6 +27,7 @@ const extractVideoOrPlaylistIdFromUrl = (url: string) => {
 };
 
 export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
+  const { isMobile } = useScreenSize({});
   const playerRef = useRef<any>(null);
   const containerId = "youtube-player";
 
@@ -50,9 +52,10 @@ export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
       playerRef.current = new window.YT.Player(containerId, {
         videoId: result.type === "video" ? result.id : undefined,
         playerVars: {
-          autoplay: 1,
+          autoplay: isMobile ? 0 : 1,
           controls: 1,
           modestbranding: 1,
+          playsinline: 1,
           listType: result.type === "playlist" ? "playlist" : undefined,
           list: result.type === "playlist" ? result.id : undefined,
         },
