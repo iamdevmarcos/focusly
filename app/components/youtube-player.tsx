@@ -56,13 +56,16 @@ export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
           controls: 1,
           modestbranding: 1,
           playsinline: 1,
+          rel: 0,
           listType: result.type === "playlist" ? "playlist" : undefined,
           list: result.type === "playlist" ? result.id : undefined,
         },
         events: {
-          onReady: () => {
-            // event.target.mute();
-            // event.target.playVideo();
+          onReady: (event: any) => {
+            if (!isMobile) {
+              event.target.mute();
+              event.target.playVideo();
+            }
           },
         },
       });
@@ -94,12 +97,12 @@ export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
         playerRef.current = null;
       }
     };
-  }, [videoUrl]);
+  }, [videoUrl, isMobile]);
 
   return (
     <div
       id={containerId}
-      className="h-[120px] w-[220px] rounded-md border border-focusly-text-gray bg-focusly-bg-dark transition-all duration-300 ease-in-out hover:border-gray-500 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 group-hover:h-[250px] group-hover:w-[400px] peer-focus:h-[250px] peer-focus:w-[400px]"
+      className="h-[120px] w-[220px] rounded-md border border-focusly-text-gray bg-focusly-bg-dark transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 md:hover:border-gray-500 md:hover:shadow-lg md:group-hover:h-[250px] md:group-hover:w-[400px] md:peer-focus:h-[250px] md:peer-focus:w-[400px]"
     />
   );
 };
