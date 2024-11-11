@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { HotKey } from "../hotkey";
 import { YoutubePlayer } from "../youtube-player";
+import { useScreenSize } from "~/hooks/useScreenSize";
 
 interface FooterProps {
   videoUrl: string;
@@ -19,6 +20,7 @@ export const FooterPresentation = ({
   handleKeyDown,
 }: FooterProps) => {
   const { t } = useTranslation();
+  const { isMobile } = useScreenSize({});
 
   return (
     <footer className="mb-5 flex w-screen flex-row items-center justify-center px-20 md:items-end md:justify-between">
@@ -28,7 +30,9 @@ export const FooterPresentation = ({
             placeholder={t("ytVideo.input")}
             className={`${
               showInput ? "block" : "hidden"
-            } peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out group-hover:block`}
+            } peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out ${
+              !isMobile ? "group-hover:block" : ""
+            }`}
             onKeyDown={handleKeyDown}
           />
           <YoutubePlayer videoUrl={videoUrl} />
