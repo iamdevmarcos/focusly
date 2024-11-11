@@ -4,9 +4,11 @@ import { useFocusly } from "~/context/focusly-context";
 import { formatMinutes } from "~/helpers/formatTime";
 import { TimerPresentation } from "./timer-presentation";
 import { useNotifications } from "~/context/notifications-context";
+import { useScreenSize } from "~/hooks/useScreenSize";
 
 export const TimerContainer = () => {
   const { showNotificationPrompt } = useNotifications();
+  const { isDesktop, isMobile, isTablet } = useScreenSize({});
 
   const {
     timeLeft,
@@ -31,10 +33,13 @@ export const TimerContainer = () => {
   const showRestControls = sessionsCompleted >= 1 && isResting;
   const showStartRestButton = showRestControls && !isRunning;
   const showFocusButtonDesktop =
-    sessionsCompleted >= 1 && !isResting && !isRunning;
+    sessionsCompleted >= 1 && !isResting && !isRunning && isDesktop;
 
   const showFocusButtonMobile =
-    !isRunning && !isResting && !showSessionCompletedMessage;
+    (isMobile || isTablet) &&
+    !isRunning &&
+    !isResting &&
+    !showSessionCompletedMessage;
 
   return (
     <TimerPresentation

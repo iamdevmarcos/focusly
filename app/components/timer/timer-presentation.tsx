@@ -36,8 +36,6 @@ export const TimerPresentation = ({
   timeLeft,
   sessionsCompleted,
   isRunning,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  isResting,
   skipRestTime,
   startTimer,
   onPause,
@@ -59,16 +57,17 @@ export const TimerPresentation = ({
         </p>
       )}
 
-      <div
-        className={`flex items-center gap-4 ${
-          showFocusButtonMobile ||
-          (showFocusButtonDesktop && !showSessionCompletedMessage)
-            ? "block"
-            : "hidden"
-        } md:${showFocusButtonDesktop && !showSessionCompletedMessage ? "flex" : "hidden"}`}
-      >
-        <ActionButton onClick={startTimer}>{t("startFocus")}</ActionButton>
-      </div>
+      {showFocusButtonMobile && (
+        <div className={`flex items-center gap-4`}>
+          <ActionButton onClick={startTimer}>{t("startFocus")}</ActionButton>
+        </div>
+      )}
+
+      {showFocusButtonDesktop && (
+        <div className={`flex items-center gap-4`}>
+          <ActionButton onClick={startTimer}>{t("startFocus")}</ActionButton>
+        </div>
+      )}
 
       {showRestControls && (
         <div className="flex flex-col items-center gap-4 md:flex-row">
