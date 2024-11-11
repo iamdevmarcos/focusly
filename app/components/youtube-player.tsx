@@ -60,9 +60,9 @@ export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
           list: result.type === "playlist" ? result.id : undefined,
         },
         events: {
-          onReady: (event: any) => {
-            event.target.mute();
-            event.target.playVideo();
+          onReady: () => {
+            // event.target.mute();
+            // event.target.playVideo();
           },
         },
       });
