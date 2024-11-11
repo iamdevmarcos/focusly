@@ -12,7 +12,9 @@ export const HeaderContainer = () => {
   const [tempFocusTime, setTempFocusTime] = useState<number | undefined>(
     Math.floor(focusTime / 60),
   );
-  const [tempRestTime, setTempRestTime] = useState(Math.floor(restTime / 60));
+  const [tempRestTime, setTempRestTime] = useState<number | undefined>(
+    Math.floor(restTime / 60),
+  );
 
   const applySettings = () => {
     if (

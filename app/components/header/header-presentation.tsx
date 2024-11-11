@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, Suspense } from "react";
 import { BsCommand } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Button } from "../button";
-import { Suspense } from "react";
 import Modal from "../modal";
 import i18n from "~/i18n/config";
 import { useTranslation } from "react-i18next";
@@ -32,6 +32,13 @@ const HeaderPresentation = ({
 }: HeaderPresentationProps) => {
   const { t } = useTranslation();
 
+  const [tempLanguage, setTempLanguage] = useState<string>(i18n.language);
+
+  const handleApplySettings = () => {
+    i18n.changeLanguage(tempLanguage);
+    applySettings();
+  };
+
   return (
     <div className="flex w-screen flex-row items-center justify-between px-6 md:px-20">
       <img
@@ -47,8 +54,6 @@ const HeaderPresentation = ({
             icon={<BsCommand className="h-8 w-8" />}
           />
         </div>
-
-        {/* <InstallPWA /> */}
 
         <Button
           icon={<IoSettingsOutline className="h-8 w-8" />}
@@ -110,8 +115,8 @@ const HeaderPresentation = ({
                       type="radio"
                       name="language"
                       value="pt"
-                      checked={i18n.language === "pt"}
-                      onChange={() => i18n.changeLanguage("pt")}
+                      checked={tempLanguage === "pt"}
+                      onChange={() => setTempLanguage("pt")}
                       className="appearance-none rounded-sm border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-gray-500"
                     />
                     {i18n.t("config.portuguese")}
@@ -121,8 +126,8 @@ const HeaderPresentation = ({
                       type="radio"
                       name="language"
                       value="en"
-                      checked={i18n.language === "en"}
-                      onChange={() => i18n.changeLanguage("en")}
+                      checked={tempLanguage === "en"}
+                      onChange={() => setTempLanguage("en")}
                       className="appearance-none rounded-sm border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-gray-500"
                     />
                     {i18n.t("config.english")}
@@ -131,7 +136,7 @@ const HeaderPresentation = ({
               </div>
 
               <button
-                onClick={applySettings}
+                onClick={handleApplySettings}
                 className="scale-100 rounded-sm border border-focusly-text-gray bg-focusly-gradient px-8 py-4 text-focusly-normal font-semibold text-focusly-text-gray opacity-100 transition-opacity duration-300 ease-out hover:border-focusly-bg-dark hover:bg-focusly-gradient-white hover:text-focusly-bg-dark"
               >
                 {i18n.t("config.button")}
