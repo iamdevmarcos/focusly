@@ -36,7 +36,7 @@ const Modal = ({ isOpen, closeModal, title, children }: ModalProps) => {
         <div className="relative transform overflow-hidden rounded-sm border border-focusly-text-white bg-focusly-bg-dark text-left shadow-xl transition-all sm:w-full sm:max-w-xl">
           <div className="bg-focusly-bg-dark p-6">
             <div className="sm:flex sm:items-start">
-              <div className="w-full text-center sm:mt-0 sm:text-left">
+              <div className="w-full text-left sm:mt-0 sm:text-left">
                 <h3
                   className="text-focusly-medium font-semibold text-focusly-text-white"
                   id="modal-title"

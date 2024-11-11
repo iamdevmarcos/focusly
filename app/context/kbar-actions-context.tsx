@@ -40,14 +40,6 @@ export const KbarActionsProvider = ({ children }: PropsWithChildren) => {
       keywords: "reset",
       perform: resetTimer,
     },
-    {
-      id: "create_task",
-      name: t("actions.create_task"),
-      section: t("actions.commands"),
-      keywords: "create",
-      shortcut: ["Control", "Enter"],
-      perform: () => alert("click"),
-    },
   ];
 
   return (

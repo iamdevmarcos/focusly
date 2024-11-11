@@ -62,8 +62,11 @@ const HeaderPresentation = ({
             title={i18n.t("config.title")}
           >
             <div className="flex flex-col justify-between gap-4">
-              <div className="flex items-center justify-between">
-                <label htmlFor="focusTime" className="text-focusly-text-white">
+              <div className="flex flex-col items-stretch justify-between gap-2 md:flex-row md:items-center md:gap-0">
+                <label
+                  htmlFor="focusTime"
+                  className="text-left text-focusly-text-white"
+                >
                   {i18n.t("config.focus_time")}
                 </label>
                 <input
@@ -78,8 +81,11 @@ const HeaderPresentation = ({
                 />
               </div>
 
-              <div className="flex items-center justify-between">
-                <label htmlFor="restTime" className="text-focusly-text-white">
+              <div className="flex flex-col items-stretch justify-between gap-2 md:flex-row md:items-center md:gap-0">
+                <label
+                  htmlFor="restTime"
+                  className="text-left text-focusly-text-white"
+                >
                   {i18n.t("config.rest_time")}
                 </label>
                 <input
@@ -94,11 +100,11 @@ const HeaderPresentation = ({
                 />
               </div>
 
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
                 <label htmlFor="language" className="text-focusly-text-white">
                   {i18n.t("config.languageTitle")}:
                 </label>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
                   <label className="flex items-center gap-2 text-focusly-text-white">
                     <input
                       type="radio"
