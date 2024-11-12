@@ -58,7 +58,7 @@ export const InstallPWA = () => {
 
   if (!isSecure || !isChrome || isInstalled || isMobile) return <></>;
 
-  if (isInstallable && !isChrome) {
+  if (isInstallable && isChrome) {
     return (
       <Button onClick={handleInstallClick}>
         <MdInstallDesktop className="h-8 w-8" />
