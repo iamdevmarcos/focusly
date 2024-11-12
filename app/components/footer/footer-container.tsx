@@ -2,9 +2,11 @@ import { KeyboardEvent, useEffect, useState } from "react";
 import { useLoaderData } from "@remix-run/react";
 import { FooterPresentation } from "./footer-presentation";
 import { useTranslation } from "react-i18next";
+import { useScreenSize } from "~/hooks/useScreenSize";
 
 export const FooterContainer = () => {
   const { t } = useTranslation();
+  const { isMobile } = useScreenSize({});
   const { city, country } = useLoaderData<{ city: string; country: string }>();
 
   const [videoUrl, setVideoUrl] = useState(
@@ -14,7 +16,7 @@ export const FooterContainer = () => {
   const [textIndex, setTextIndex] = useState(0);
 
   const texts = [
-    "Focusly — by @marcosmendes 🔥",
+    isMobile ? t("shortTitle") : t("title"),
     `${t("last_visitor")} ${city}/${country}`,
   ];
 

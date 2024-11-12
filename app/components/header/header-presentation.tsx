@@ -6,6 +6,7 @@ import { Button } from "../button";
 import Modal from "../modal";
 import i18n from "~/i18n/config";
 import { useTranslation } from "react-i18next";
+import { InstallPWA } from "../installPWA";
 
 interface HeaderPresentationProps {
   query: any;
@@ -48,12 +49,12 @@ const HeaderPresentation = ({
       />
 
       <div className="relative flex items-center gap-4">
-        <div className="relative">
-          <Button
-            onClick={query.toggle}
-            icon={<BsCommand className="h-8 w-8" />}
-          />
-        </div>
+        <InstallPWA />
+
+        <Button
+          onClick={query.toggle}
+          icon={<BsCommand className="h-8 w-8" />}
+        />
 
         <Button
           icon={<IoSettingsOutline className="h-8 w-8" />}
