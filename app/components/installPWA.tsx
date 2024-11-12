@@ -8,7 +8,6 @@ export const InstallPWA = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstallable, setIsInstallable] = useState(false);
   const [isSecure, setIsSecure] = useState(false);
-  const [isArcBrowser, setIsArcBrowser] = useState(false);
   const [isChrome, setIsChrome] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
   const { isMobile } = useScreenSize({});
@@ -26,12 +25,8 @@ export const InstallPWA = () => {
     if (!secureProtocol) return;
     const userAgent = window.navigator.userAgent;
 
-    const isChromeBrowser =
-      /Chrome/.test(userAgent) && !/Edg|OPR|CriOS|Safari/.test(userAgent);
+    const isChromeBrowser = /Chrome/.test(userAgent);
     setIsChrome(isChromeBrowser);
-
-    const isArc = userAgent.includes("Arc");
-    setIsArcBrowser(isArc);
 
     const handleBeforeInstallPrompt = (event: any) => {
       event.preventDefault();
@@ -61,10 +56,9 @@ export const InstallPWA = () => {
     });
   };
 
-  if (!isSecure || isArcBrowser || !isChrome || isInstalled || isMobile)
-    return <></>;
+  if (!isSecure || !isChrome || isInstalled || isMobile) return <></>;
 
-  if (isInstallable) {
+  if (isInstallable && !isChrome) {
     return (
       <Button onClick={handleInstallClick}>
         <MdInstallDesktop className="h-8 w-8" />
