@@ -18,6 +18,7 @@ export const FooterContainer = () => {
   const texts = [
     isMobile ? t("shortTitle") : t("title"),
     `${t("last_visitor")} ${city}/${country}`,
+    "buy_me_a_coffee_button",
   ];
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -34,7 +35,7 @@ export const FooterContainer = () => {
     }, 10000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [texts.length]);
 
   return (
     <FooterPresentation
