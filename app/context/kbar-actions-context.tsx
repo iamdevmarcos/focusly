@@ -40,6 +40,21 @@ export const KbarActionsProvider = ({ children }: PropsWithChildren) => {
       keywords: "reset",
       perform: resetTimer,
     },
+    {
+      id: "linkedin_page",
+      name: "🔗 LinkedIn",
+      section: t("actions.commands"),
+      shortcut: ["LinkedIn"],
+      perform: () =>
+        window.open("https://www.linkedin.com/company/focusly-app", "_blank"),
+    },
+    {
+      id: "buymeacoffee",
+      name: "☕️ Buy me a coffee",
+      section: t("actions.commands"),
+      shortcut: ["☕️"],
+      perform: () => window.open("https://buymeacoffee.com/focusly", "_blank"),
+    },
   ];
 
   return (
