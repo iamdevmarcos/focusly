@@ -3,6 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import { FooterPresentation } from "./footer-presentation";
 import { useTranslation } from "react-i18next";
 import { useScreenSize } from "~/hooks/useScreenSize";
+import i18n from "~/i18n/config";
 
 export const FooterContainer = () => {
   const { t } = useTranslation();
@@ -16,7 +17,7 @@ export const FooterContainer = () => {
   const [textIndex, setTextIndex] = useState(0);
 
   const texts = [
-    isMobile ? t("shortTitle") : t("title"),
+    isMobile || i18n.language === "pt" ? t("shortTitle") : t("title"),
     `${t("last_visitor")} ${city}/${country}`,
     "buy_me_a_coffee_button",
   ];
