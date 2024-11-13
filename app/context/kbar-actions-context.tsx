@@ -41,6 +41,13 @@ export const KbarActionsProvider = ({ children }: PropsWithChildren) => {
       perform: resetTimer,
     },
     {
+      id: "github",
+      name: "🚀 Github",
+      section: t("actions.commands"),
+      shortcut: ["Github"],
+      perform: () => window.open("https://github.com/iamdevmarcos", "_blank"),
+    },
+    {
       id: "linkedin_page",
       name: "🔗 LinkedIn",
       section: t("actions.commands"),
