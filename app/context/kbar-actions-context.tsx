@@ -48,14 +48,6 @@ export const KbarActionsProvider = ({ children }: PropsWithChildren) => {
       perform: () => window.open("https://github.com/iamdevmarcos", "_blank"),
     },
     {
-      id: "linkedin_page",
-      name: "🔗 LinkedIn",
-      section: t("actions.commands"),
-      shortcut: ["LinkedIn"],
-      perform: () =>
-        window.open("https://www.linkedin.com/company/focusly-app", "_blank"),
-    },
-    {
       id: "buymeacoffee",
       name: "☕️ Buy me a coffee",
       section: t("actions.commands"),
