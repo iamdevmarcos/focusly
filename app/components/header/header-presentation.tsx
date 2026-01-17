@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Suspense } from "react";
-import { IoSettingsOutline } from "react-icons/io5";
+import { Github, Settings } from "lucide-react";
 import { Button } from "../button";
 import Modal from "../modal";
-import { FiGithub } from "react-icons/fi";
 import { ThemeSwitcher } from "../theme-switcher";
 
 interface HeaderPresentationProps {
@@ -36,18 +34,18 @@ const HeaderPresentation = ({
         className="h-[70px] w-[70px] md:h-20 md:w-20"
       />
 
-      <div className="relative flex items-center gap-4">
+      <div className="relative flex items-center gap-2">
         <ThemeSwitcher />
 
         <Button
           onClick={() =>
             window.open("https://github.com/iamdevmarcos", "_blank")
           }
-          icon={<FiGithub className="h-8 w-8" />}
+          icon={<Github className="h-7 w-7" strokeWidth={1.5} />}
         />
 
         <Button
-          icon={<IoSettingsOutline className="h-8 w-8" />}
+          icon={<Settings className="h-7 w-7" strokeWidth={1.5} />}
           onClick={openModal}
         />
 

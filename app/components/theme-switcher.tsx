@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
+import { Sun, Moon, Monitor } from "lucide-react";
 import { useTheme, type Theme } from "~/context/theme-context";
 
 const themes: { value: Theme; label: string; icon: React.ReactNode }[] = [
-  { value: "light", label: "Light", icon: <FiSun className="h-4 w-4" /> },
-  { value: "dark", label: "Dark", icon: <FiMoon className="h-4 w-4" /> },
-  { value: "system", label: "System", icon: <FiMonitor className="h-4 w-4" /> },
+  { value: "light", label: "Light", icon: <Sun className="h-4 w-4" strokeWidth={1.5} /> },
+  { value: "dark", label: "Dark", icon: <Moon className="h-4 w-4" strokeWidth={1.5} /> },
+  { value: "system", label: "System", icon: <Monitor className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 export function ThemeSwitcher() {
@@ -29,16 +29,16 @@ export function ThemeSwitcher() {
 
   const currentIcon =
     resolvedTheme === "dark" ? (
-      <FiMoon className="h-5 w-5" />
+      <Moon className="h-7 w-7" strokeWidth={1.5} />
     ) : (
-      <FiSun className="h-5 w-5" />
+      <Sun className="h-7 w-7" strokeWidth={1.5} />
     );
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex cursor-pointer items-center justify-center text-foreground transition-colors duration-200 hover:opacity-50"
+        className="flex h-10 w-10 cursor-pointer items-center justify-center text-foreground transition-colors duration-200 hover:opacity-50"
         aria-label="Toggle theme"
       >
         {currentIcon}

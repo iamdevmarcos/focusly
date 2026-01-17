@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useScreenSize } from "~/hooks/useScreenSize";
-import { MdInstallDesktop } from "react-icons/md";
+import { Download } from "lucide-react";
 import { Button } from "./button";
 
 export const InstallPWA = () => {
@@ -61,7 +61,7 @@ export const InstallPWA = () => {
   if (isInstallable && isChrome) {
     return (
       <Button onClick={handleInstallClick}>
-        <MdInstallDesktop className="h-8 w-8" />
+        <Download className="h-5 w-5" strokeWidth={1.5} />
       </Button>
     );
   }
