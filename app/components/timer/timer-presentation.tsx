@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { useTranslation } from "react-i18next";
 
 interface TimerPresentationProps {
   timeLeft: string;
@@ -45,7 +44,6 @@ export const TimerPresentation = ({
   showRestControls,
   showStartRestButton,
 }: TimerPresentationProps) => {
-  const { t } = useTranslation();
 
   return (
     <main className="flex flex-col items-center text-[70px] font-semibold md:gap-8 md:text-focusly-heading">
@@ -53,30 +51,30 @@ export const TimerPresentation = ({
 
       {showSessionCompletedMessage && (
         <p className="animate-fadeIn text-focusly-normal transition-opacity duration-500 ease-in-out md:text-focusly-medium">
-          {`${t("sessions_completed")} -> ${sessionsCompleted} 🥳`}
+          {`Completed sessions -> ${sessionsCompleted} 🥳`}
         </p>
       )}
 
       {showFocusButtonMobile && (
         <div className={`flex items-center gap-4`}>
-          <ActionButton onClick={startTimer}>{t("startFocus")}</ActionButton>
+          <ActionButton onClick={startTimer}>Start focus 🔥</ActionButton>
         </div>
       )}
 
       {showFocusButtonDesktop && (
         <div className={`flex items-center gap-4`}>
-          <ActionButton onClick={startTimer}>{t("startFocus")}</ActionButton>
+          <ActionButton onClick={startTimer}>Start focus 🔥</ActionButton>
         </div>
       )}
 
       {showRestControls && (
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <ActionButton onClick={skipRestTime}>
-            {t("skipRestFocus")}
+            Skip rest
           </ActionButton>
           {showStartRestButton && (
             <ActionButton onClick={startTimer}>
-              {t("startRestFocus")}
+              Start rest
             </ActionButton>
           )}
         </div>

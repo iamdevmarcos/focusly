@@ -4,7 +4,6 @@ import {
   useCallback,
   useContext,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 interface NotificationsContextProps {
   requestPermission: () => void;
@@ -17,7 +16,6 @@ const NotificationsContext = createContext<
 >(undefined);
 
 export const NotificationsProvider = ({ children }: PropsWithChildren) => {
-  const { t } = useTranslation();
 
   const requestPermission = useCallback(() => {
     if ("Notification" in window && Notification.permission !== "granted") {
@@ -48,7 +46,7 @@ export const NotificationsProvider = ({ children }: PropsWithChildren) => {
   const showNotificationPrompt = () => {
     const hasSeenPrompt = localStorage.getItem("hasSeenNotificationPrompt");
     if (!hasSeenPrompt) {
-      window.alert(t("notification_prompt"));
+      window.alert("Allow notifications to be informed when your focus session ends!");
     }
 
     requestPermission();

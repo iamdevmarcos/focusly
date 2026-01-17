@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { HotKey } from "../hotkey";
 import { YoutubePlayer } from "../youtube-player";
 import { useScreenSize } from "~/hooks/useScreenSize";
@@ -19,7 +18,6 @@ export const FooterPresentation = ({
   textIndex,
   handleKeyDown,
 }: FooterProps) => {
-  const { t } = useTranslation();
   const { isMobile } = useScreenSize({});
 
   return (
@@ -27,7 +25,7 @@ export const FooterPresentation = ({
       <div className="flex min-w-max flex-col items-center gap-4 md:items-start">
         <div className="group flex flex-col gap-4">
           <input
-            placeholder={t("ytVideo.input")}
+            placeholder="Paste the video URL and press enter"
             className={`${
               showInput ? "block" : "hidden"
             } peer rounded-md border border-focusly-text-secondary bg-focusly-bg px-4 py-2 text-focusly-text-primary transition-all duration-200 ease-in-out ${
@@ -55,11 +53,11 @@ export const FooterPresentation = ({
       </div>
 
       <div className="hidden md:flex md:flex-col md:gap-2.5">
-        <HotKey keys={["R"]} description={`-> ${t("reset")}`} />
-        <HotKey keys={["Backspace"]} description={`-> ${t("play_pause")}`} />
+        <HotKey keys={["R"]} description="-> Reset Time" />
+        <HotKey keys={["Backspace"]} description="-> Play/Pause" />
         <HotKey
           keys={["Control", "K"]}
-          description={`-> ${t("actions.commands")}`}
+          description="-> Commands List"
         />
       </div>
     </footer>

@@ -8,7 +8,6 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
-import i18n from "./i18n/config";
 import { FocuslyProvider } from "./context/focusly-context";
 import { Toaster } from "sonner";
 import { NotificationsProvider } from "./context/notifications-context";
@@ -38,7 +37,7 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={i18n.language || "en"} className="dark" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -73,21 +72,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/images/logo.png" />
 
-        <meta name="description" content={i18n.t("description")} />
-        <meta name="keywords" content={i18n.t("keywords")} />
+        <meta name="description" content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned." />
+        <meta name="keywords" content="Pomodoro, Productivity, Task Management, Focusly, Get Things Done, Time Management" />
         <meta name="author" content="SupaWave" />
         <link rel="canonical" href="https://withfocusly.com/" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={i18n.t("title")} />
-        <meta property="og:description" content={i18n.t("description")} />
+        <meta property="og:title" content="Focusly — Get Things Done, as Planned. 🔥" />
+        <meta property="og:description" content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned." />
         <meta property="og:image" content="/images/logo.png" />
         <meta property="og:url" content="https://withfocusly.com/" />
         <meta property="og:site_name" content="Focusly" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={i18n.t("title")} />
-        <meta name="twitter:description" content={i18n.t("description")} />
+        <meta name="twitter:title" content="Focusly — Get Things Done, as Planned. 🔥" />
+        <meta name="twitter:description" content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned." />
         <meta name="twitter:image" content="/images/logo.png" />
         <meta name="twitter:site" content="@focuslybr" />
         <script

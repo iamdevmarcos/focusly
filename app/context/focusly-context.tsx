@@ -6,7 +6,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { useNotifications } from "./notifications-context";
 import { useSound } from "~/hooks/useSound";
@@ -35,7 +34,6 @@ const FocuslyContext = createContext<FocuslyContextProps | undefined>(
 );
 
 export const FocuslyProvider = ({ children }: PropsWithChildren) => {
-  const { t } = useTranslation();
   const { playComplete } = useSound();
   const { sendNotification } = useNotifications();
   const { requestWakeLock, releaseWakeLock } = useWakeLock();
@@ -55,20 +53,20 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
     updateTimeLeft(nextTime);
     toggleRunningState(false);
     releaseWakeLock();
-    toast(t(isResting ? "rest_reset" : "session_reset"));
-  }, [releaseWakeLock, t, isResting, focusTime, restTime]);
+    toast(isResting ? "Rest reset! 🔄" : "Session reset! 🚀");
+  }, [releaseWakeLock, isResting, focusTime, restTime]);
 
   const startTimer = useCallback(() => {
     toggleRunningState(true);
     requestWakeLock();
-    toast(t(isResting ? "rest_started" : "session_started"));
-  }, [requestWakeLock, t, isResting]);
+    toast(isResting ? "Rest started! 😴" : "Session started! 🔥");
+  }, [requestWakeLock, isResting]);
 
   const pauseTimer = useCallback(() => {
     toggleRunningState(false);
     releaseWakeLock();
-    toast(t(isResting ? "rest_paused" : "session_paused"));
-  }, [releaseWakeLock, t, isResting]);
+    toast(isResting ? "Rest paused! ⏸️" : "Session paused! ⏸️");
+  }, [releaseWakeLock, isResting]);
 
   const setCustomTime = useCallback(
     (value: number) => {
@@ -103,25 +101,25 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
   const startNewFocusSession = useCallback(() => {
     setIsResting(false);
     updateTimeLeft(focusTime);
-    toast(t("rest_completed"));
-    sendNotification(t("rest_completed"), t("back_to_focus"));
-  }, [t, sendNotification, focusTime]);
+    toast("Rest completed! 🔥");
+    sendNotification("Rest completed!", "Back to focus!");
+  }, [sendNotification, focusTime]);
 
   const startRestSession = useCallback(() => {
     setSessionsCompleted((prev) => prev + 1);
     setIsResting(true);
     updateTimeLeft(restTime);
-    toast(t("session_completed"));
-    sendNotification(t("focusly_completed"), t("time_to_break"));
-  }, [t, sendNotification, restTime]);
+    toast("Session completed! 🎉");
+    sendNotification("Focusly session completed!", "Time to take a break 🎉");
+  }, [sendNotification, restTime]);
 
   const skipRestTime = useCallback(() => {
     if (isResting) {
       startNewFocusSession();
       toggleRunningState(true);
-      toast(t("rest_skipped"));
+      toast("Rest skipped! 🔥");
     }
-  }, [isResting, startNewFocusSession, t]);
+  }, [isResting, startNewFocusSession]);
 
   useEffect(() => handleTimerTick(), [handleTimerTick]);
 

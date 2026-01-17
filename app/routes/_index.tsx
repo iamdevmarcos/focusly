@@ -5,14 +5,13 @@ import { FooterContainer } from "~/components/footer/footer-container";
 import { HeaderContainer } from "~/components/header/header-container";
 import { TimerContainer } from "~/components/timer/timer-container";
 import { useKbarActions } from "~/context/kbar-actions-context";
-import i18n from "~/i18n/config";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: i18n.t("title") },
+    { title: "Focusly — Get Things Done, as Planned. 🔥" },
     {
       name: "description",
-      content: i18n.t("description"),
+      content: "A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned.",
     },
   ];
 };

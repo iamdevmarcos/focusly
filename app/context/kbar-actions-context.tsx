@@ -1,7 +1,6 @@
 import { Action } from "kbar";
 import { createContext, PropsWithChildren, useContext } from "react";
 import { useFocusly } from "./focusly-context";
-import { useTranslation } from "react-i18next";
 
 interface KbarActionsProps {
   actions: Action[];
@@ -12,30 +11,29 @@ const KbarActionsContext = createContext<KbarActionsProps | undefined>(
 );
 
 export const KbarActionsProvider = ({ children }: PropsWithChildren) => {
-  const { t } = useTranslation();
   const { startTimer, pauseTimer, resetTimer } = useFocusly();
 
   const actions = [
     {
       id: "play",
-      name: t("actions.play"),
-      section: t("actions.commands"),
+      name: "🚀 Start Session",
+      section: "Commands List",
       shortcut: ["Backspace"],
       keywords: "play, play timer, start",
       perform: startTimer,
     },
     {
       id: "pause",
-      name: t("actions.pause"),
-      section: t("actions.commands"),
+      name: "⏸️ Pause Session",
+      section: "Commands List",
       shortcut: ["Backspace"],
       keywords: "pause, pause timer",
       perform: pauseTimer,
     },
     {
       id: "reset",
-      name: t("actions.reset"),
-      section: t("actions.commands"),
+      name: "🔄 Reset Session",
+      section: "Commands List",
       shortcut: ["R"],
       keywords: "reset",
       perform: resetTimer,
@@ -43,14 +41,14 @@ export const KbarActionsProvider = ({ children }: PropsWithChildren) => {
     {
       id: "github",
       name: "🚀 Github",
-      section: t("actions.commands"),
+      section: "Commands List",
       shortcut: ["Github"],
       perform: () => window.open("https://github.com/iamdevmarcos", "_blank"),
     },
     {
       id: "buymeacoffee",
       name: "☕️ Buy me a coffee",
-      section: t("actions.commands"),
+      section: "Commands List",
       shortcut: ["☕️"],
       perform: () => window.open("https://buymeacoffee.com/focusly", "_blank"),
     },
