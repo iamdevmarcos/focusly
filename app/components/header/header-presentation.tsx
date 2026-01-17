@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Suspense } from "react";
-import { BsCommand } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Button } from "../button";
 import Modal from "../modal";
@@ -8,7 +7,6 @@ import { FiGithub } from "react-icons/fi";
 import { ThemeSwitcher } from "../theme-switcher";
 
 interface HeaderPresentationProps {
-  query: any;
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
@@ -20,7 +18,6 @@ interface HeaderPresentationProps {
 }
 
 const HeaderPresentation = ({
-  query,
   isOpen,
   openModal,
   closeModal,
@@ -47,11 +44,6 @@ const HeaderPresentation = ({
             window.open("https://github.com/iamdevmarcos", "_blank")
           }
           icon={<FiGithub className="h-8 w-8" />}
-        />
-
-        <Button
-          onClick={query.toggle}
-          icon={<BsCommand className="h-8 w-8" />}
         />
 
         <Button

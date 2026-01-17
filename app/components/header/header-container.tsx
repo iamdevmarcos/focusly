@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useKBar } from "kbar";
 import { useModal } from "~/hooks/useModal";
 import { useFocusly } from "~/context/focusly-context";
 import HeaderPresentation from "./header-presentation";
 
 export const HeaderContainer = () => {
-  const { query } = useKBar();
   const { isOpen, openModal, closeModal } = useModal();
   const { setCustomTime, setRestTime, focusTime, restTime } = useFocusly();
 
@@ -31,7 +29,6 @@ export const HeaderContainer = () => {
 
   return (
     <HeaderPresentation
-      query={query}
       isOpen={isOpen}
       openModal={openModal}
       closeModal={closeModal}

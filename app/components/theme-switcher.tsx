@@ -38,7 +38,7 @@ export function ThemeSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex h-10 w-10 cursor-pointer items-center justify-center text-foreground transition-colors duration-200 hover:opacity-50"
+        className="flex cursor-pointer items-center justify-center text-foreground transition-colors duration-200 hover:opacity-50"
         aria-label="Toggle theme"
       >
         {currentIcon}
