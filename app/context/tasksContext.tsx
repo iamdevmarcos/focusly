@@ -4,6 +4,8 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
+  useRef,
   useState,
 } from "react";
 
@@ -28,6 +30,7 @@ const TasksContext = createContext<TasksContextProps | undefined>(undefined);
 export const TasksProvider = ({ children }: PropsWithChildren) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const storedTasks = localStorage.getItem("tasks");
@@ -36,29 +39,50 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
     }
   }, []);
 
-  const updateLocalStorage = (tasks: Task[]) => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  };
+  const updateLocalStorage = useCallback((tasks: Task[]) => {
+    // Debounce localStorage writes to prevent blocking
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+    }
 
-  const addTask = useCallback((title: string) => {
-    const newTask: Task = { id: Date.now().toString(), title, isDone: false };
-
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks, newTask];
-      updateLocalStorage(updatedTasks);
-      return updatedTasks;
-    });
+    saveTimeoutRef.current = setTimeout(() => {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }, 300);
   }, []);
 
-  const toggleTaskStatus = useCallback((id: string) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = prevTasks.map((task) =>
-        task.id === id ? { ...task, isDone: !task.isDone } : task,
-      );
-      updateLocalStorage(updatedTasks);
-      return updatedTasks;
-    });
+  useEffect(() => {
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+    };
   }, []);
+
+  const addTask = useCallback(
+    (title: string) => {
+      const newTask: Task = { id: Date.now().toString(), title, isDone: false };
+
+      setTasks((prevTasks) => {
+        const updatedTasks = [...prevTasks, newTask];
+        updateLocalStorage(updatedTasks);
+        return updatedTasks;
+      });
+    },
+    [updateLocalStorage],
+  );
+
+  const toggleTaskStatus = useCallback(
+    (id: string) => {
+      setTasks((prevTasks) => {
+        const updatedTasks = prevTasks.map((task) =>
+          task.id === id ? { ...task, isDone: !task.isDone } : task,
+        );
+        updateLocalStorage(updatedTasks);
+        return updatedTasks;
+      });
+    },
+    [updateLocalStorage],
+  );
 
   const removeCompletedTasks = useCallback(() => {
     setTasks((prevTasks) => {
@@ -66,7 +90,7 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
       updateLocalStorage(updatedTasks);
       return updatedTasks;
     });
-  }, []);
+  }, [updateLocalStorage]);
 
   const handleAddTask = () => {
     if (newTaskTitle.trim() !== "") {
@@ -75,18 +99,28 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const contextValue = useMemo(
+    () => ({
+      tasks,
+      addTask,
+      toggleTaskStatus,
+      removeCompletedTasks,
+      newTaskTitle,
+      setNewTaskTitle,
+      handleAddTask,
+    }),
+    [
+      tasks,
+      addTask,
+      toggleTaskStatus,
+      removeCompletedTasks,
+      newTaskTitle,
+      handleAddTask,
+    ],
+  );
+
   return (
-    <TasksContext.Provider
-      value={{
-        tasks,
-        addTask,
-        toggleTaskStatus,
-        removeCompletedTasks,
-        newTaskTitle,
-        setNewTaskTitle,
-        handleAddTask,
-      }}
-    >
+    <TasksContext.Provider value={contextValue}>
       {children}
     </TasksContext.Provider>
   );

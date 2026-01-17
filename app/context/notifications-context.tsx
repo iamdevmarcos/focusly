@@ -3,6 +3,7 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
+  useMemo,
 } from "react";
 
 interface NotificationsContextProps {
@@ -16,7 +17,6 @@ const NotificationsContext = createContext<
 >(undefined);
 
 export const NotificationsProvider = ({ children }: PropsWithChildren) => {
-
   const requestPermission = useCallback(() => {
     if ("Notification" in window && Notification.permission !== "granted") {
       Notification.requestPermission().then((permission) => {
@@ -46,17 +46,22 @@ export const NotificationsProvider = ({ children }: PropsWithChildren) => {
   const showNotificationPrompt = () => {
     const hasSeenPrompt = localStorage.getItem("hasSeenNotificationPrompt");
     if (!hasSeenPrompt) {
-      window.alert("Allow notifications to be informed when your focus session ends!");
+      window.alert(
+        "Allow notifications to be informed when your focus session ends!",
+      );
     }
 
     requestPermission();
     localStorage.setItem("hasSeenNotificationPrompt", "true");
   };
 
+  const contextValue = useMemo(
+    () => ({ requestPermission, sendNotification, showNotificationPrompt }),
+    [requestPermission, sendNotification],
+  );
+
   return (
-    <NotificationsContext.Provider
-      value={{ requestPermission, sendNotification, showNotificationPrompt }}
-    >
+    <NotificationsContext.Provider value={contextValue}>
       {children}
     </NotificationsContext.Provider>
   );

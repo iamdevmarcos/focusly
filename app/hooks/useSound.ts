@@ -1,7 +1,9 @@
 import { Howl } from "howler";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const useSound = () => {
+  const soundCacheRef = useRef<Map<string, Howl>>(new Map());
+
   useEffect(() => {
     // need that for works on safari
     const silentSound = new Howl({
@@ -15,6 +17,9 @@ export const useSound = () => {
 
     return () => {
       window.removeEventListener("click", playSilentSound);
+      // Cleanup all cached sounds
+      soundCacheRef.current.forEach((sound) => sound.unload());
+      soundCacheRef.current.clear();
     };
   }, []);
 
@@ -25,18 +30,25 @@ export const useSound = () => {
     source: string;
     duration?: number;
   }) => {
-    const sound = new Howl({
-      src: [`/sounds/${source}`],
-      volume: 0.5,
-      preload: true,
-      loop: !!duration,
-    });
+    // Check if sound is already cached
+    let sound = soundCacheRef.current.get(source);
+
+    if (!sound) {
+      // Create and cache new sound
+      sound = new Howl({
+        src: [`/sounds/${source}`],
+        volume: 0.5,
+        preload: true,
+        loop: !!duration,
+      });
+      soundCacheRef.current.set(source, sound);
+    }
 
     const soundId = sound.play();
 
     if (duration) {
       setTimeout(() => {
-        sound.stop(soundId);
+        sound!.stop(soundId);
       }, duration);
     }
 

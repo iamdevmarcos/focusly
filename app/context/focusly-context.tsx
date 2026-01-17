@@ -4,6 +4,8 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
+  useRef,
   useState,
 } from "react";
 import { toast } from "sonner";
@@ -88,14 +90,26 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
     [isResting],
   );
 
-  const handleTimerTick = useCallback(() => {
-    if (!isRunning || timeLeft <= 0) return;
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-    const interval = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
+  useEffect(() => {
+    if (isRunning && timeLeft > 0) {
+      intervalRef.current = setInterval(() => {
+        setTimeLeft((prev) => prev - 1);
+      }, 1000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    }
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [isRunning, timeLeft]);
 
   const startNewFocusSession = useCallback(() => {
@@ -121,8 +135,6 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
     }
   }, [isResting, startNewFocusSession]);
 
-  useEffect(() => handleTimerTick(), [handleTimerTick]);
-
   useEffect(() => {
     if (timeLeft === 0 && isRunning) {
       if (isResting) {
@@ -142,23 +154,39 @@ export const FocuslyProvider = ({ children }: PropsWithChildren) => {
     startRestSession,
   ]);
 
+  const contextValue = useMemo(
+    () => ({
+      focusTime,
+      restTime,
+      isRunning,
+      timeLeft,
+      sessionsCompleted,
+      isResting,
+      startTimer,
+      pauseTimer,
+      resetTimer,
+      setCustomTime,
+      setRestTime,
+      skipRestTime,
+    }),
+    [
+      focusTime,
+      restTime,
+      isRunning,
+      timeLeft,
+      sessionsCompleted,
+      isResting,
+      startTimer,
+      pauseTimer,
+      resetTimer,
+      setCustomTime,
+      setRestTime,
+      skipRestTime,
+    ],
+  );
+
   return (
-    <FocuslyContext.Provider
-      value={{
-        focusTime,
-        restTime,
-        isRunning,
-        timeLeft,
-        sessionsCompleted,
-        isResting,
-        startTimer,
-        pauseTimer,
-        resetTimer,
-        setCustomTime,
-        setRestTime,
-        skipRestTime,
-      }}
-    >
+    <FocuslyContext.Provider value={contextValue}>
       {children}
     </FocuslyContext.Provider>
   );
