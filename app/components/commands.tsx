@@ -39,7 +39,7 @@ const SearchResults = () => {
             }`}
           >
             <span>{item.name}</span>
-            <kbd className="ml-2 inline-flex gap-2 rounded border border-gray-600 bg-transparent px-2 py-1 text-sm text-focusly-text-white">
+            <kbd className="ml-2 inline-flex gap-2 rounded border border-gray-600 bg-transparent px-2 py-1 text-sm text-focusly-text-primary">
               ⌘
               {item.shortcut?.map((shortKey, index) => {
                 return <p key={index}>{shortKey}</p>;

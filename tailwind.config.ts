@@ -6,9 +6,25 @@ import { fontFamily } from "./app/theme/fontFamily";
 
 export default {
   content: ["./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
-      colors,
+      colors: {
+        ...colors,
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        border: "hsl(var(--border))",
+        ring: "hsl(var(--ring))",
+        "focusly-bg": "var(--focusly-bg)",
+        "focusly-text": {
+          primary: "var(--focusly-text-primary)",
+          secondary: "var(--focusly-text-secondary)",
+        },
+      },
       fontSize,
       fontFamily,
       keyframes: {
@@ -21,9 +37,7 @@ export default {
         fadeIn: "fadeIn 0.5s ease-in-out",
       },
       backgroundImage: {
-        "focusly-gradient": `
-          linear-gradient(to bottom left, #121214, #111, #000, #1a1a1a)
-        `,
+        "focusly-gradient": "var(--focusly-gradient)",
         "focusly-gradient-white": `
           linear-gradient(to bottom left, #333, #f9f9f9, #f2f2f2, #ececec, #e6e6e6);
         `,

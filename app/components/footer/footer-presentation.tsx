@@ -30,7 +30,7 @@ export const FooterPresentation = ({
             placeholder={t("ytVideo.input")}
             className={`${
               showInput ? "block" : "hidden"
-            } peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out ${
+            } peer rounded-md border border-focusly-text-secondary bg-focusly-bg px-4 py-2 text-focusly-text-primary transition-all duration-200 ease-in-out ${
               !isMobile ? "group-hover:block" : ""
             }`}
             onKeyDown={handleKeyDown}

@@ -26,7 +26,7 @@ const ActionButton = ({
 }) => (
   <button
     onClick={onClick}
-    className="scale-100 rounded-sm border border-focusly-text-gray bg-focusly-gradient px-6 py-4 text-focusly-normal font-semibold text-focusly-text-gray opacity-100 transition-opacity duration-300 ease-out hover:border-focusly-bg-dark hover:bg-focusly-gradient-white hover:text-focusly-bg-dark md:px-8 md:py-4"
+    className="scale-100 rounded-sm border border-focusly-text-secondary bg-focusly-bg px-6 py-4 text-focusly-normal font-semibold text-focusly-text-secondary opacity-100 transition-all duration-300 ease-out hover:bg-[image:var(--focusly-gradient-hover)] hover:text-focusly-text-primary md:px-8 md:py-4"
   >
     {children}
   </button>

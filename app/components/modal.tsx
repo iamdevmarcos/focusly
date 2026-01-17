@@ -33,12 +33,12 @@ const Modal = ({ isOpen, closeModal, title, children }: ModalProps) => {
         className="fixed inset-0 bg-black/40 backdrop-blur-md transition-opacity"
       />
       <div className="fixed inset-0 z-20 flex items-center justify-center p-4 text-center">
-        <div className="relative transform overflow-hidden rounded-sm border border-focusly-text-white bg-focusly-bg-dark text-left shadow-xl transition-all sm:w-full sm:max-w-xl">
-          <div className="bg-focusly-bg-dark p-6">
+        <div className="relative transform overflow-hidden rounded-sm border border-focusly-text-secondary bg-focusly-bg text-left shadow-xl transition-all sm:w-full sm:max-w-xl">
+          <div className="bg-focusly-bg p-6">
             <div className="sm:flex sm:items-start">
               <div className="w-full text-left sm:mt-0 sm:text-left">
                 <h3
-                  className="text-focusly-medium font-semibold text-focusly-text-white"
+                  className="text-focusly-medium font-semibold text-focusly-text-primary"
                   id="modal-title"
                 >
                   {title}
@@ -49,7 +49,7 @@ const Modal = ({ isOpen, closeModal, title, children }: ModalProps) => {
             </div>
           </div>
           <button
-            className="absolute right-6 top-4 text-focusly-text-white"
+            className="absolute right-6 top-4 text-focusly-text-primary"
             onClick={closeModal}
           >
             ❌

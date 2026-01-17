@@ -15,6 +15,7 @@ import { NotificationsProvider } from "./context/notifications-context";
 import { useEffect } from "react";
 import { KbarActionsProvider } from "./context/kbar-actions-context";
 import { TasksProvider } from "./context/tasksContext";
+import { ThemeProvider } from "./context/theme-context";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -37,8 +38,21 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={i18n.language || "en"}>
+    <html lang={i18n.language || "en"} className="dark" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const stored = localStorage.getItem('focusly-theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored === 'light' ? 'light' : stored === 'dark' ? 'dark' : (prefersDark ? 'dark' : 'light');
+                document.documentElement.classList.remove('light', 'dark');
+                document.documentElement.classList.add(theme);
+              })();
+            `,
+          }}
+        />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -110,14 +124,16 @@ export default function App() {
   }, []);
 
   return (
-    <NotificationsProvider>
-      <TasksProvider>
-        <FocuslyProvider>
-          <KbarActionsProvider>
-            <Outlet />
-          </KbarActionsProvider>
-        </FocuslyProvider>
-      </TasksProvider>
-    </NotificationsProvider>
+    <ThemeProvider>
+      <NotificationsProvider>
+        <TasksProvider>
+          <FocuslyProvider>
+            <KbarActionsProvider>
+              <Outlet />
+            </KbarActionsProvider>
+          </FocuslyProvider>
+        </TasksProvider>
+      </NotificationsProvider>
+    </ThemeProvider>
   );
 }

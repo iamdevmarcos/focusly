@@ -43,7 +43,7 @@ export default function Index() {
 
   return (
     <KBarProvider actions={actions}>
-      <div className="flex h-screen flex-col items-center justify-between bg-focusly-gradient py-4 text-focusly-text-white">
+      <div className="flex h-screen flex-col items-center justify-between bg-focusly-gradient py-4 text-focusly-text-primary">
         <CommandBar />
         <HeaderContainer />
         <TimerContainer />

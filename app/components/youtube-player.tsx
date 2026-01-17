@@ -102,7 +102,7 @@ export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
   return (
     <div
       id={containerId}
-      className="h-[120px] w-[220px] rounded-md border border-focusly-text-gray bg-focusly-bg-dark transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 md:hover:border-gray-500 md:hover:shadow-lg md:group-hover:h-[250px] md:group-hover:w-[400px] md:peer-focus:h-[250px] md:peer-focus:w-[400px]"
+      className="h-[120px] w-[220px] rounded-md border border-focusly-text-secondary bg-focusly-bg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 md:hover:border-gray-500 md:hover:shadow-lg md:group-hover:h-[250px] md:group-hover:w-[400px] md:peer-focus:h-[250px] md:peer-focus:w-[400px]"
     />
   );
 };

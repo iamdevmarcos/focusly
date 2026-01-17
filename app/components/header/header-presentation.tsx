@@ -7,6 +7,7 @@ import Modal from "../modal";
 import i18n from "~/i18n/config";
 import { useTranslation } from "react-i18next";
 import { FiGithub } from "react-icons/fi";
+import { ThemeSwitcher } from "../theme-switcher";
 
 interface HeaderPresentationProps {
   query: any;
@@ -49,6 +50,8 @@ const HeaderPresentation = ({
       />
 
       <div className="relative flex items-center gap-4">
+        <ThemeSwitcher />
+
         <Button
           onClick={() =>
             window.open("https://github.com/iamdevmarcos", "_blank")
@@ -76,7 +79,7 @@ const HeaderPresentation = ({
               <div className="flex flex-col items-stretch justify-between gap-2 md:flex-row md:items-center md:gap-0">
                 <label
                   htmlFor="focusTime"
-                  className="text-left text-focusly-text-white"
+                  className="text-left text-focusly-text-primary"
                 >
                   {i18n.t("config.focus_time")}
                 </label>
@@ -88,14 +91,14 @@ const HeaderPresentation = ({
                     setTempFocusTime(parseInt(e.target.value, 10) || undefined)
                   }
                   placeholder={t("rest.input")}
-                  className="peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out"
+                  className="peer rounded-md border border-focusly-text-secondary bg-focusly-bg px-4 py-2 text-focusly-text-primary transition-all duration-200 ease-in-out"
                 />
               </div>
 
               <div className="flex flex-col items-stretch justify-between gap-2 md:flex-row md:items-center md:gap-0">
                 <label
                   htmlFor="restTime"
-                  className="text-left text-focusly-text-white"
+                  className="text-left text-focusly-text-primary"
                 >
                   {i18n.t("config.rest_time")}
                 </label>
@@ -107,34 +110,34 @@ const HeaderPresentation = ({
                     setTempRestTime(parseInt(e.target.value, 10) || undefined)
                   }
                   placeholder={t("focus_input")}
-                  className="peer rounded-md border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out"
+                  className="peer rounded-md border border-focusly-text-secondary bg-focusly-bg px-4 py-2 text-focusly-text-primary transition-all duration-200 ease-in-out"
                 />
               </div>
 
               <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
-                <label htmlFor="language" className="text-focusly-text-white">
+                <label htmlFor="language" className="text-focusly-text-primary">
                   {i18n.t("config.languageTitle")}:
                 </label>
                 <div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
-                  <label className="flex items-center gap-2 text-focusly-text-white">
+                  <label className="flex items-center gap-2 text-focusly-text-primary">
                     <input
                       type="radio"
                       name="language"
                       value="pt"
                       checked={tempLanguage === "pt"}
                       onChange={() => setTempLanguage("pt")}
-                      className="appearance-none rounded-sm border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-gray-500"
+                      className="appearance-none rounded-sm border border-focusly-text-secondary bg-focusly-bg px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-focusly-text-secondary"
                     />
                     {i18n.t("config.portuguese")}
                   </label>
-                  <label className="flex items-center gap-2 text-focusly-text-white">
+                  <label className="flex items-center gap-2 text-focusly-text-primary">
                     <input
                       type="radio"
                       name="language"
                       value="en"
                       checked={tempLanguage === "en"}
                       onChange={() => setTempLanguage("en")}
-                      className="appearance-none rounded-sm border border-focusly-text-gray bg-focusly-bg-dark px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-gray-500"
+                      className="appearance-none rounded-sm border border-focusly-text-secondary bg-focusly-bg px-4 py-2 transition-all duration-200 ease-in-out checked:border-transparent checked:bg-focusly-text-secondary"
                     />
                     {i18n.t("config.english")}
                   </label>
@@ -143,7 +146,7 @@ const HeaderPresentation = ({
 
               <button
                 onClick={handleApplySettings}
-                className="scale-100 rounded-sm border border-focusly-text-gray bg-focusly-gradient px-8 py-4 text-focusly-normal font-semibold text-focusly-text-gray opacity-100 transition-opacity duration-300 ease-out hover:border-focusly-bg-dark hover:bg-focusly-gradient-white hover:text-focusly-bg-dark"
+                className="scale-100 rounded-sm border border-focusly-text-secondary bg-focusly-bg px-8 py-4 text-focusly-normal font-semibold text-focusly-text-secondary opacity-100 transition-all duration-300 ease-out hover:bg-[image:var(--focusly-gradient-hover)] hover:text-focusly-text-primary"
               >
                 {i18n.t("config.button")}
               </button>
