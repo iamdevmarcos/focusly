@@ -1,6 +1,6 @@
 import { type MetaFunction } from "@remix-run/node";
 import { KBarProvider } from "kbar";
-import CommandBar from "~/components/commands";
+import CommandBar from "~/components/command-bar-new";
 import { FooterContainer } from "~/components/footer/footer-container";
 import { HeaderContainer } from "~/components/header/header-container";
 import { TimerContainer } from "~/components/timer/timer-container";
