@@ -3,6 +3,7 @@ import { Github, Settings } from "lucide-react";
 import { Button } from "../button";
 import Modal from "../modal";
 import { ThemeSwitcher } from "../theme-switcher";
+import { YoutubeMusicIntegration } from "../youtube-music.integration";
 
 interface HeaderPresentationProps {
   isOpen: boolean;
@@ -25,7 +26,6 @@ const HeaderPresentation = ({
   setTempRestTime,
   applySettings,
 }: HeaderPresentationProps) => {
-
   return (
     <div className="flex w-screen flex-row items-center justify-between px-6 md:px-20">
       <img
@@ -35,6 +35,7 @@ const HeaderPresentation = ({
       />
 
       <div className="relative flex items-center gap-2">
+        <YoutubeMusicIntegration />
         <ThemeSwitcher />
 
         <Button
@@ -50,11 +51,7 @@ const HeaderPresentation = ({
         />
 
         <Suspense fallback={null}>
-          <Modal
-            isOpen={isOpen}
-            closeModal={closeModal}
-            title="Settings ⚙️"
-          >
+          <Modal isOpen={isOpen} closeModal={closeModal} title="Settings ⚙️">
             <div className="flex flex-col justify-between gap-4">
               <div className="flex flex-col items-stretch justify-between gap-2 md:flex-row md:items-center md:gap-0">
                 <label

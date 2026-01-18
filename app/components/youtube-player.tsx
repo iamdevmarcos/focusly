@@ -49,16 +49,13 @@ export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
         return;
       }
 
-      playerRef.current = new window.YT.Player(containerId, {
-        videoId: result.type === "video" ? result.id : undefined,
+      const playerConfig: any = {
         playerVars: {
           autoplay: isMobile ? 0 : 1,
           controls: 1,
           modestbranding: 1,
           playsinline: 1,
           rel: 0,
-          listType: result.type === "playlist" ? "playlist" : undefined,
-          list: result.type === "playlist" ? result.id : undefined,
         },
         events: {
           onReady: (event: any) => {
@@ -68,7 +65,16 @@ export const YoutubePlayer = ({ videoUrl }: { videoUrl: string }) => {
             }
           },
         },
-      });
+      };
+
+      if (result.type === "playlist") {
+        playerConfig.playerVars.listType = "playlist";
+        playerConfig.playerVars.list = result.id;
+      } else {
+        playerConfig.videoId = result.id;
+      }
+
+      playerRef.current = new window.YT.Player(containerId, playerConfig);
     };
 
     const loadYoutubeAPI = () => {

@@ -16,6 +16,7 @@
     "@remix-run/react": "^2.13.1",
     "@remix-run/serve": "^2.13.1",
     "@remix-run/vercel": "^1.19.3",
+    "gapi-script": "^1.2.0",
     "howler": "^2.2.4",
     "isbot": "^4.1.0",
     "kbar": "^0.1.0-beta.45",
@@ -23,7 +24,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hotkeys-hook": "^4.6.1",
-        "sonner": "^1.5.0"
+    "react-youtube": "^10.1.0",
+    "sonner": "^1.5.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.13.1",

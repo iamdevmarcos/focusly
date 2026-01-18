@@ -1,9 +1,11 @@
 import {
+  json,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
@@ -15,6 +17,7 @@ import { useEffect } from "react";
 import { KbarActionsProvider } from "./context/kbar-actions-context";
 import { TasksProvider } from "./context/tasksContext";
 import { ThemeProvider } from "./context/theme-context";
+import { YoutubeMusicProvider } from "./context/youtube-music-context";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,6 +37,15 @@ export const links: LinksFunction = () => [
     type: "image/png",
   },
 ];
+
+export async function loader() {
+  return json({
+    ENV: {
+      GOOGLE_CLOUD_CLIENT_ID: process.env.GOOGLE_CLOUD_CLIENT_ID,
+      GOOGLE_CLOUD_API_KEY: process.env.GOOGLE_CLOUD_API_KEY,
+    },
+  });
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -72,27 +84,51 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/images/logo.png" />
 
-        <meta name="description" content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned." />
-        <meta name="keywords" content="Pomodoro, Productivity, Task Management, Focusly, Get Things Done, Time Management" />
+        <meta
+          name="description"
+          content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned."
+        />
+        <meta
+          name="keywords"
+          content="Pomodoro, Productivity, Task Management, Focusly, Get Things Done, Time Management"
+        />
         <meta name="author" content="SupaWave" />
         <link rel="canonical" href="https://withfocusly.com/" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Focusly — Get Things Done, as Planned. 🔥" />
-        <meta property="og:description" content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned." />
+        <meta
+          property="og:title"
+          content="Focusly — Get Things Done, as Planned. 🔥"
+        />
+        <meta
+          property="og:description"
+          content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned."
+        />
         <meta property="og:image" content="/images/logo.png" />
         <meta property="og:url" content="https://withfocusly.com/" />
         <meta property="og:site_name" content="Focusly" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Focusly — Get Things Done, as Planned. 🔥" />
-        <meta name="twitter:description" content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned." />
+        <meta
+          name="twitter:title"
+          content="Focusly — Get Things Done, as Planned. 🔥"
+        />
+        <meta
+          name="twitter:description"
+          content="A modern, minimalist, and easy-to-use Pomodoro timer to help you get things done as planned."
+        />
         <meta name="twitter:image" content="/images/logo.png" />
         <meta name="twitter:site" content="@focuslybr" />
         <script
-          type="module"
+          async
           src="https://unpkg.com/@material-tailwind/html@latest/scripts/tooltip.js"
         ></script>
+        <script
+          src="https://accounts.google.com/gsi/client"
+          async
+          defer
+        ></script>
+        <script src="https://apis.google.com/js/api.js"></script>
 
         <Meta />
         <Links />
@@ -109,6 +145,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const data = useLoaderData<typeof loader>();
+
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
@@ -123,16 +161,25 @@ export default function App() {
   }, []);
 
   return (
-    <ThemeProvider>
-      <NotificationsProvider>
-        <TasksProvider>
-          <FocuslyProvider>
-            <KbarActionsProvider>
-              <Outlet />
-            </KbarActionsProvider>
-          </FocuslyProvider>
-        </TasksProvider>
-      </NotificationsProvider>
-    </ThemeProvider>
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+        }}
+      />
+      <ThemeProvider>
+        <NotificationsProvider>
+          <TasksProvider>
+            <FocuslyProvider>
+              <KbarActionsProvider>
+                <YoutubeMusicProvider>
+                  <Outlet />
+                </YoutubeMusicProvider>
+              </KbarActionsProvider>
+            </FocuslyProvider>
+          </TasksProvider>
+        </NotificationsProvider>
+      </ThemeProvider>
+    </>
   );
 }
