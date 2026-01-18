@@ -4,6 +4,7 @@ import { Button } from "../button";
 import Modal from "../modal";
 import { ThemeSwitcher } from "../theme-switcher";
 import { YoutubeMusicIntegration } from "../youtube-music.integration";
+import PathDrawing from "../path-drawing";
 
 interface HeaderPresentationProps {
   isOpen: boolean;
@@ -27,12 +28,10 @@ const HeaderPresentation = ({
   applySettings,
 }: HeaderPresentationProps) => {
   return (
-    <div className="flex w-screen flex-row items-center justify-between px-6 md:px-20">
-      <img
-        src="/images/logo-transparent.png"
-        alt="Logo Focusly"
-        className="h-[70px] w-[70px] md:h-20 md:w-20"
-      />
+    <div className="flex w-screen flex-row items-center justify-between px-6 py-4 md:px-20">
+      <div>
+        <PathDrawing />
+      </div>
 
       <div className="relative flex items-center gap-2">
         <YoutubeMusicIntegration />

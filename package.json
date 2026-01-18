@@ -16,6 +16,7 @@
     "@remix-run/react": "^2.13.1",
     "@remix-run/serve": "^2.13.1",
     "@remix-run/vercel": "^1.19.3",
+    "framer-motion": "^12.26.2",
     "gapi-script": "^1.2.0",
     "howler": "^2.2.4",
     "isbot": "^4.1.0",

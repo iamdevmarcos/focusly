@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TimerPresentationProps {
   timeLeft: string;
@@ -44,16 +45,23 @@ export const TimerPresentation = ({
   showRestControls,
   showStartRestButton,
 }: TimerPresentationProps) => {
-
   return (
     <main className="flex flex-col items-center text-[70px] font-semibold md:gap-8 md:text-focusly-heading">
       <h1 onClick={isRunning ? onPause : startTimer}>{timeLeft}</h1>
 
-      {showSessionCompletedMessage && (
-        <p className="animate-fadeIn text-focusly-normal transition-opacity duration-500 ease-in-out md:text-focusly-medium">
-          {`Completed sessions -> ${sessionsCompleted} 🥳`}
-        </p>
-      )}
+      <AnimatePresence>
+        {showSessionCompletedMessage && (
+          <motion.p
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="text-focusly-normal md:text-focusly-medium"
+          >
+            {`Completed sessions -> ${sessionsCompleted} 🥳`}
+          </motion.p>
+        )}
+      </AnimatePresence>
 
       {showFocusButtonMobile && (
         <div className={`flex items-center gap-4`}>
@@ -69,13 +77,9 @@ export const TimerPresentation = ({
 
       {showRestControls && (
         <div className="flex flex-col items-center gap-4 md:flex-row">
-          <ActionButton onClick={skipRestTime}>
-            Skip rest
-          </ActionButton>
+          <ActionButton onClick={skipRestTime}>Skip rest</ActionButton>
           {showStartRestButton && (
-            <ActionButton onClick={startTimer}>
-              Start rest
-            </ActionButton>
+            <ActionButton onClick={startTimer}>Start rest</ActionButton>
           )}
         </div>
       )}
